@@ -1,0 +1,1113 @@
+<title>Latin Shows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tinos:ital@0;1&display=swap">
+<style>
+/* Layout: masthead + one Times headline, then a sticky filter strip over a two-column venue ledger (venue | its week of bills).
+   Palette and type follow the THE·TEAM identity system (Mar '26): Softened Black on Digital White, cool greys as neutrals,
+   Forest Green as the sparing signifier. Gotham Medium/Book (Montserrat stand-in), Times roman + italic, never bold. */
+:root {
+  --bg: #fffdf8;          /* Digital White */
+  --panel: #f3f2ee;
+  --ink: #100906;         /* Softened Black */
+  --grey7: #97999b;       /* Cool Grey 7 */
+  --grey4: #bbbcbc;       /* Cool Grey 4 */
+  --grey1: #d9d9d6;       /* Cool Grey 1 */
+  --muted: #6f7173;       /* Cool Grey 7, deepened for small text */
+  --accent: #2e7040;      /* Forest Green */
+  --tint: #e2ece4;        /* Forest Green at ~14% on Digital White: client rows */
+  --sans: Arial, "Helvetica Neue", Helvetica, sans-serif;  /* on every computer, so it looks the same everywhere */
+  --serif: "Times New Roman", "Tinos", Times, serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; background: var(--bg); color: var(--ink); font-family: var(--sans); font-weight: 400; font-size: 14px; line-height: 1.45; letter-spacing: -.02em; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
+.label { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+
+/* masthead */
+.mast { border-bottom: 1px solid var(--grey1); }
+.mast .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 18px; flex-wrap: wrap; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex: none; }
+.checked { color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.checked .byline { margin-left: 10px; padding-left: 12px; border-left: 1px solid var(--grey4); color: var(--ink); text-decoration: none; }
+.checked .byline:hover { color: var(--accent); }
+.checked .dot { width: 7px; height: 7px; }
+
+/* hero */
+.hero .wrap { padding-block: clamp(24px, 4vw, 40px) clamp(20px, 3vw, 32px); }
+.hero h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(30px, 4.2vw, 44px); line-height: 1; letter-spacing: -.02em;
+  margin: 16px 0 0; text-wrap: balance;
+  display: inline-block; transform: scaleX(.9); transform-origin: left;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero p { color: var(--muted); max-width: 58ch; margin: 20px 0 0; }
+.cities { display: flex; gap: 4px 26px; flex-wrap: wrap; }
+.city { background: none; border: 0; padding: 0 0 4px; cursor: pointer; font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); letter-spacing: -.02em; color: var(--grey7); border-bottom: 1px solid transparent; }
+.city:hover { color: var(--ink); }
+.city[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.city small { font-family: var(--sans); font-size: 10px; letter-spacing: .1em; color: var(--grey7); margin-left: 6px; vertical-align: 3px; font-variant-numeric: tabular-nums; }
+
+/* tabs + filters */
+.tabs { border-top: 1px solid var(--grey1); }
+.tabs .wrap { display: flex; gap: 12px 20px; padding-block: 16px; flex-wrap: wrap; align-items: center; }
+.sortby { color: var(--grey7); }
+.seg { display: inline-flex; border: 1px solid var(--ink); }
+.tab {
+  background: var(--bg); border: 0; padding: 10px 22px; cursor: pointer;
+  font-weight: 500; font-size: 14px; color: var(--ink);
+}
+.seg .tab + .tab { border-left: 1px solid var(--ink); }
+.seg .tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.seg .tab:not([aria-selected="true"]):hover { background: var(--panel); }
+.toggle {
+  background: var(--bg); border: 1px solid var(--ink); padding: 10px 18px; cursor: pointer;
+  font-weight: 500; font-size: 14px; color: var(--ink);
+}
+.toggle[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.toggle.team { border-color: var(--accent); color: var(--accent); }
+.toggle.team:not([aria-pressed="true"]):hover { background: var(--tint); }
+.toggle.team[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.toggle:not([aria-pressed="true"]):hover { background: var(--panel); }
+.cap { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--ink); padding: 0 14px; min-height: 41px; background: var(--bg); }
+.cap.on { background: var(--panel); }
+.cap-label { font-size: 14px; font-weight: 500; }
+.cap-val { font-size: 13px; font-variant-numeric: tabular-nums; min-width: 92px; white-space: nowrap; }
+.cap-range { position: relative; width: 150px; height: 22px; }
+.cap-track { position: absolute; left: 7px; right: 7px; top: 10px; height: 2px; background: var(--grey4); }
+.cap-fill { position: absolute; top: 0; height: 2px; background: var(--ink); }
+.cap-range input { position: absolute; inset: 0; width: 100%; height: 22px; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+.cap-range input::-webkit-slider-runnable-track { background: none; height: 22px; }
+.cap-range input::-moz-range-track { background: none; }
+.cap-range input::-webkit-slider-thumb { pointer-events: auto; -webkit-appearance: none; width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; background: var(--ink); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--ink); cursor: pointer; }
+.cap-range input::-moz-range-thumb { pointer-events: auto; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--ink); cursor: pointer; }
+.cap-range input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--accent); }
+.spacer { margin-left: auto; }
+.list.by-date { margin-top: 20px; border-top: 1px solid var(--grey1); }
+.new-count { font-size: 11px; margin-left: 6px; padding: 1px 6px; border-radius: 9px; background: var(--accent); color: var(--bg); font-variant-numeric: tabular-nums; }
+.new-count:empty { display: none; }
+.new-tag { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 0 4px; margin-left: 8px; vertical-align: 2px; border-radius: 2px; }
+/* Two pages: This week, and Just announced (the log of every show as it was first seen). */
+.pages { display: flex; gap: 22px; }
+.pages a { color: var(--grey7); text-decoration: none; padding-bottom: 3px; border-bottom: 1px solid transparent; display: inline-flex; align-items: center; }
+.pages a:hover { color: var(--ink); }
+.pages a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+.page-new .week-only, body:not(.page-new) .new-only { display: none !important; }
+.gap-note { color: var(--muted); font-family: var(--sans); font-size: 12px; margin: 6px 0 0; }
+.tab.saved { padding: 10px 0; background: none; color: var(--muted); border-bottom: 1px solid transparent; }
+.tab.saved[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+.tab.saved:hover { color: var(--accent); }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--panel); border-block: 1px solid var(--grey1); }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding-block: 10px; }
+.chips { display: flex; gap: 4px; flex: 1 1 100%; min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }  /* a month of days: one row that scrolls sideways */
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; }
+@media (min-width: 900px) { .chips { flex-wrap: wrap; overflow: visible; } }  /* room for two rows; no sideways scrolling with a mouse */
+.chip {
+  font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--bg); border: 1px solid var(--grey1); padding: 7px 10px; cursor: pointer; border-radius: 0;
+  font-variant-numeric: tabular-nums;
+}
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip small { font-size: 10px; opacity: .6; margin-left: 3px; }
+.search { flex: 1 1 180px; min-width: 0; max-width: 280px; background: var(--bg); border: 1px solid var(--grey1); border-radius: 0; padding: 7px 10px; font: inherit; font-size: 13px; color: var(--ink); }
+.search::placeholder { color: var(--muted); }
+.count { margin-left: auto; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* sections */
+main { padding-block: 8px 80px; }
+.sect-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-block: 28px 10px; border-bottom: 1px solid var(--grey1); }
+.sect-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.6vw, 26px); letter-spacing: -.02em; margin: 0; }
+.sect-head h2 em { font-style: italic; }
+
+.venue { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); border-bottom: 1px solid var(--grey1); }
+.venue-name { padding: 18px 20px 18px 0; border-right: 1px solid var(--grey4); }
+.venue-name h3 { font-family: var(--serif); font-weight: 400; font-size: 27px; color: var(--accent); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 8px; }
+.venue-name .label { color: var(--muted); display: block; line-height: 1.7; }
+.rows { min-width: 0; }
+
+.row {
+  display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 4px 16px;
+  padding: 14px 0 14px 18px; align-items: start; border-bottom: 1px dotted var(--grey1);
+}
+.rows .row:last-child { border-bottom: 0; }
+.list .row { padding-left: 0; }
+.when { color: var(--ink); padding-top: 4px; }
+.when b { display: block; font-weight: 500; }
+.when span { color: var(--muted); font-weight: 500; }
+.bill { min-width: 0; }
+.head { font-weight: 500; font-size: 16px; letter-spacing: -.02em; }
+.head a { text-decoration: none; border-bottom: 1px solid var(--grey4); }
+.head a:hover { color: var(--accent); border-color: var(--accent); }
+.support { margin-top: 4px; display: flex; gap: 2px 10px; flex-wrap: wrap; align-items: baseline; }
+.support .label { color: var(--grey7); font-size: 9px; }
+.support .acts { color: var(--ink); }
+.support .acts i { font-style: normal; color: var(--grey4); margin: 0 6px; }
+.support.none .acts { color: var(--grey7); font-size: 12px; }
+.support .acts.shared { color: var(--muted); font-style: italic; font-size: 12px; }
+.at { margin-top: 5px; color: var(--muted); font-size: 15px; }
+.at b { color: var(--accent); font-weight: 500; }
+.meta { display: flex; gap: 12px; align-items: center; white-space: nowrap; font-size: 12px; color: var(--muted); padding-top: 2px; }
+.meta .t { font-variant-numeric: tabular-nums; }
+.meta .price, .meta .onsale { font-variant-numeric: tabular-nums; }
+.meta .onsale { color: var(--accent); }
+.meta .onsale.past { color: var(--muted); }
+.page-new.compact .row:not(.open) { grid-template-columns: 92px minmax(0, 1fr) 280px; }
+@media (max-width: 720px) { .page-new.compact .row:not(.open) { grid-template-columns: 52px minmax(0, 1fr); } }
+.status-tag { font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--grey4); padding: 0 4px; margin-left: 8px; vertical-align: 2px; border-radius: 2px; }
+.save { background: none; border: 0; cursor: pointer; padding: 2px; line-height: 0; color: var(--grey7); }
+.save svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+.cal { background: none; border: 0; cursor: pointer; padding: 2px; line-height: 0; color: var(--grey7); }
+.cal svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+.cal:hover { color: var(--accent); }
+/* Inside the Claude artifact viewer, file saves are limited to types that exclude .ics: hide calendar UI there. */
+.no-ics .cal, .no-ics .ics-btn { display: none !important; }
+#exportDlg { border: 1px solid var(--ink); padding: 0; background: var(--bg); color: var(--ink); width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 32px); }
+#exportDlg::backdrop { background: rgba(0, 0, 0, .35); }
+.xp { padding: 20px 22px; display: grid; gap: 14px; }
+.xp-head { display: flex; justify-content: space-between; align-items: center; }
+.xp-head h2 { margin: 0; font-size: 22px; font-weight: 400; }
+.xp-x { background: none; border: 0; font-size: 24px; line-height: 1; cursor: pointer; color: var(--ink); }
+.xp fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.xp legend { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 6px; }
+.xp-opt { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.xp-row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 14px; }
+.xp select, .xp input[type=date] { font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--grey4); background: var(--bg); color: var(--ink); }
+.xp-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px 12px; font-size: 14px; }
+.xp-check, .xp-cols label, .xp-row label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.xp-foot { display: flex; gap: 10px; align-items: center; justify-content: flex-end; border-top: 1px solid var(--grey1); padding-top: 14px; flex-wrap: wrap; }
+.xp-n { margin-right: auto; font-size: 13px; color: var(--muted); }
+.xp-main { background: var(--ink); color: var(--bg); }
+.xp-cap { justify-self: start; min-height: 36px; }
+.xp-adv summary { cursor: pointer; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.xp-adv[open] summary { margin-bottom: 10px; }
+.xp-adv .xp-opt { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+.xp-text { max-height: 220px; overflow: auto; font-size: 13px; line-height: 1.45; border: 1px solid var(--grey4); background: var(--panel); color: var(--ink); padding: 4px 12px; }
+.xp-text p { margin: 10px 0 4px; } .xp-text ul { margin: 0; padding-left: 18px; } .xp-text a { color: var(--accent); }
+.ics-btn { background: none; border: 0; padding: 4px 0; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--grey4); display: inline-flex; gap: 6px; align-items: center; }
+.ics-btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.ics-btn:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.save[aria-pressed="true"] { color: var(--accent); }
+.save[aria-pressed="true"] svg { fill: currentColor; }
+.save:hover { color: var(--accent); }
+
+.row.ours { background: var(--tint); box-shadow: inset 3px 0 0 var(--accent), inset 0 0 0 .5px var(--accent); padding-left: 16px; padding-right: 12px; border-bottom-color: transparent; }
+.row.ours + .row.ours { margin-top: 3px; }
+.list .row.ours { padding-left: 16px; }
+.mine { color: var(--bg); font-weight: 500; background: var(--accent); padding: 1px 5px; border-radius: 2px; }  /* a THE·TEAM act */
+.head a.mine { border-bottom: 0; }
+.head a.mine:hover { color: var(--bg); background: var(--ink); }
+/* Under a THE·TEAM show: each client act's agents, service agent in brackets. */
+.agents-line { margin-top: 5px; font-size: 13px; color: var(--ink); }
+.agents-line .label { color: var(--accent); font-size: 9px; margin-right: 6px; }
+.agents-line em { font-style: normal; color: var(--accent); font-weight: 500; }
+.agents-line .svc { color: var(--muted); }
+.empty { padding: 48px 0; color: var(--muted); max-width: 52ch; }
+.foot { color: var(--muted); border-top: 1px solid var(--grey1); padding-block: 24px 40px; font-size: 13px; }
+.foot p { max-width: 70ch; margin: 0 0 6px; }
+.credit { margin-top: 18px !important; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey7); }
+
+/* Compact view: one line per show, spreadsheet-style columns. Click a row to open it (.open) back to full layout. */
+.compact .row:not(.open) { cursor: pointer; }
+.compact .row.open { font-size: 14px; box-shadow: inset 3px 0 0 var(--ink); background: var(--bg); }
+.compact .row.ours.open { box-shadow: inset 3px 0 0 var(--accent), inset 0 0 0 .5px var(--accent); background: var(--tint); }
+.compact .row:not(.open):hover { outline: 1px solid var(--grey4); outline-offset: -1px; }
+.compact .row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+body.compact { font-size: 12.5px; }
+.compact .sect-head { padding-block: 18px 6px; }
+.compact .sect-head h2 { font-size: 18px; }
+.compact .venue-name { padding: 8px 12px 8px 0; }
+.compact .venue-name h3 { font-size: 16px; margin: 0 0 2px; }
+.compact .row:not(.open) { grid-template-columns: 92px minmax(0, 1fr) 132px; padding: 5px 0 5px 12px; gap: 0 12px; align-items: center; border-bottom: 1px solid var(--grey1); }
+.compact .list .row:not(.open), .compact .row.ours:not(.open) { padding-left: 10px; padding-right: 8px; }
+.compact .row:nth-child(even):not(.ours):not(.open) { background: var(--panel); }
+.compact .row.ours + .row.ours { margin-top: 2px; }
+.compact .row:not(.open) .when { padding-top: 0; font-size: 9.5px; white-space: nowrap; }
+.compact .row:not(.open) .when b, .compact .row:not(.open) .when span { display: inline; margin-right: 4px; }
+.compact .row:not(.open) .when.multi b, .compact .row:not(.open) .when.multi span { display: block; margin-right: 0; line-height: 1.35; }  /* runs: days over dates, so the label fits its column */
+.compact .row:not(.open) .bill { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 1.1fr); gap: 0 14px; align-items: baseline; }
+.compact .rows .row:not(.open) .bill { grid-template-columns: minmax(0, 1.2fr) minmax(0, 2.2fr); }
+.compact .row:not(.open) .bill > * { grid-row: 1; margin: 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.compact .row:not(.open) .head { grid-column: 1; font-size: 13px; }
+.compact .row:not(.open) .support { grid-column: 2; }
+.compact .row:not(.open) .support .acts i { margin: 0 3px; }
+.compact .row:not(.open) .support.none .acts { font-size: 11.5px; }
+.compact .row:not(.open) .at { grid-column: 3; font-size: 12.5px; }
+.compact .row:not(.open) .bill > .agents-line { grid-row: 2; grid-column: 1 / -1; margin-top: 2px; font-size: 11.5px; white-space: normal; overflow: visible; }
+@media (max-width: 720px) { .compact .row:not(.open) .bill > .agents-line { grid-row: auto; } }  /* phones: one column, so under the support acts */
+.compact .row:not(.open) .meta { padding-top: 0; gap: 10px; font-size: 11.5px; justify-content: flex-end; }
+.compact .row:not(.open) .save svg, .compact .row:not(.open) .cal svg { width: 14px; height: 14px; }
+@media (max-width: 720px) {
+  .compact .row:not(.open) .bill, .compact .rows .row:not(.open) .bill { grid-template-columns: 1fr; }
+  .compact .row:not(.open) .bill > * { grid-row: auto; grid-column: 1; white-space: normal; }
+  .compact .row:not(.open) { grid-template-columns: 52px minmax(0, 1fr); }
+  .compact .row:not(.open) .when b, .compact .row:not(.open) .when span { display: block; }
+}
+@media (max-width: 720px) {
+  .venue { grid-template-columns: 1fr; }
+  .venue-name { border-right: 0; border-bottom: 1px solid var(--grey1); padding: 16px 0 10px; }
+  .row { grid-template-columns: 52px minmax(0, 1fr); padding-left: 0; }
+  .meta { grid-column: 2; }
+  .count { margin-left: 0; width: 100%; }
+  .search { max-width: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chip, .tab, .toggle, .save, .head a { transition: color .12s, background-color .12s, border-color .12s; }
+}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <nav class="pages label" id="pages" aria-label="Page">
+      <a href="#nyc" data-page="week">Next month</a>
+      <a href="#nyc/announced" data-page="new">Just announced<span class="new-count" id="newN"></span></a>
+    </nav>
+    <div class="checked label"><span class="dot"></span><span id="checked"></span><a class="byline" href="latin/">Latin roster &rarr;</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <nav class="cities" id="cities" aria-label="City"></nav>
+    <h1><em id="range"></em></h1>
+  </div>
+</section>
+
+<nav class="tabs" aria-label="Views">
+  <div class="wrap" role="tablist">
+    <span class="label sortby week-only">Sort by</span>
+    <span class="seg week-only">
+      <button class="tab" role="tab" data-view="date">Date</button>
+      <button class="tab" role="tab" data-view="venue">Venue</button>
+    </span>
+    <span class="label sortby new-only">Group by</span>
+    <span class="seg new-only" id="groupSeg">
+      <button class="tab" data-group="found">Day announced<span class="dir" aria-hidden="true"></span></button>
+      <button class="tab" data-group="date">Show date<span class="dir" aria-hidden="true"></span></button>
+      <button class="tab" data-group="onsale">On sale<span class="dir" aria-hidden="true"></span></button>
+    </span>
+    <button class="toggle team" id="oursOnly" aria-pressed="false">Roster shows only</button>
+    <button class="toggle" id="noSupport" aria-pressed="false">No support only</button>
+    <div class="cap" id="capBox" title="Room capacity (approximate). Drag either end.">
+      <span class="cap-label">Cap</span>
+      <div class="cap-range"><div class="cap-track"><div class="cap-fill" id="capFill"></div></div>
+        <input type="range" id="capLo" min="0" max="10" step="1" value="0" aria-label="Smallest room">
+        <input type="range" id="capHi" min="0" max="10" step="1" value="10" aria-label="Largest room"></div>
+      <span class="cap-val" id="capVal">Any</span>
+    </div>
+    <span class="spacer"></span>
+    <button class="toggle" id="exportBtn" title="Download this list as a CSV or PDF">Export</button>
+    <button class="ics-btn" id="icsBtn" title="Download your hearted shows as a calendar file"></button>
+    <button class="tab saved week-only" role="tab" data-view="saved">Saved (<span id="savedN">0</span>)</button>
+  </div>
+</nav>
+
+<dialog id="exportDlg" aria-labelledby="exportTitle">
+  <form method="dialog" class="xp">
+    <div class="xp-head"><h2 id="exportTitle">Export</h2><button class="xp-x" value="cancel" aria-label="Close">×</button></div>
+    <fieldset><legend>Cities</legend><div class="xp-row" id="xpCities"></div></fieldset>
+    <fieldset><legend>List</legend>
+      <div class="xp-row"><label><input type="radio" name="xpList" value="new"> Just Announced</label><label><input type="radio" name="xpList" value="week"> Upcoming Shows (next month)</label></div>
+    </fieldset>
+    <fieldset id="xpSinceBox"><legend>Announced</legend>
+      <div class="xp-row">
+        <select id="xpSince">
+          <option value="1">In the last 24 hours</option><option value="3">In the last 3 days</option>
+          <option value="7" selected>In the last 7 days</option><option value="14">In the last 14 days</option>
+          <option value="30">In the last 30 days</option><option value="date">Since a date…</option>
+        </select>
+        <input type="date" id="xpSinceDate" hidden aria-label="Announced on or after">
+      </div>
+    </fieldset>
+    <fieldset><legend>Show dates <span class="xp-opt">optional</span></legend>
+      <div class="xp-row"><label>From <input type="date" id="xpFrom"></label><label>To <input type="date" id="xpTo"></label></div>
+    </fieldset>
+    <fieldset><legend>Filters</legend>
+      <label class="xp-check"><input type="checkbox" id="xpFav"> Favorite venues only</label>
+      <label class="xp-check"><input type="checkbox" id="xpTeam"> Roster shows only</label>
+      <label class="xp-check"><input type="checkbox" id="xpNoSup"> No support only</label>
+      <div class="cap xp-cap" id="xpCapBox" title="Room capacity (approximate). Drag either end.">
+        <span class="cap-label">Cap</span>
+        <div class="cap-range"><div class="cap-track"><div class="cap-fill" id="xpCapFill"></div></div>
+          <input type="range" id="xpCapLo" min="0" max="10" step="1" value="0" aria-label="Smallest room">
+          <input type="range" id="xpCapHi" min="0" max="10" step="1" value="10" aria-label="Largest room"></div>
+        <span class="cap-val" id="xpCapVal">Any</span>
+      </div>
+    </fieldset>
+    <details class="xp-adv"><summary>Advanced settings</summary>
+      <fieldset><legend>Extra columns</legend><div class="xp-cols" id="xpCols"></div>
+        <p class="xp-opt">Headliner, support, venue and city are always included.</p></fieldset>
+    </details>
+    <fieldset><legend>Sort by</legend>
+      <div class="xp-row"><select id="xpSort">
+        <option value="found">Day announced, newest first</option><option value="date">Show date, soonest first</option>
+
+      </select></div>
+    </fieldset>
+    <div id="xpTextOut" class="xp-text" hidden aria-label="Copied text"></div>
+    <div class="xp-foot">
+      <span class="xp-n" id="xpN"></span>
+      <button type="button" class="toggle" id="xpText" title="Venue by venue: * [Artist](tickets) – Tue 9/29">Copy text</button>
+      <button type="button" class="toggle" id="xpXlsx" title="A formatted spreadsheet for Excel, Numbers or Google Sheets">Download Excel</button>
+      <button type="button" class="toggle" id="xpCsv" title="Plain values, for importing elsewhere">CSV</button>
+      <button type="button" class="toggle xp-main" id="xpPdf">Save PDF</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="chips week-only" id="dayChips" aria-label="Day"></div>
+    <input class="search" id="q" type="search" placeholder="Search artist or venue" aria-label="Search artist or venue">
+    <div class="count label" id="count"></div>
+  </div>
+</div>
+
+<main class="wrap" id="out"></main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Hearts are saved in this browser only.</p>
+    <p class="credit">Source: Ticketmaster Discovery API, genre Latin. Room sizes are approximate.</p>
+  </div>
+</footer>
+
+<script>
+const DATA = /*DATA*/null/*END*/;
+
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const FULLDAY = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+const d8 = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const dow = s => DAYS[d8(s).getDay()];
+const md = s => { const d = d8(s); return MONTHS[d.getMonth()] + " " + d.getDate(); };
+const mdy = s => md(s) + (d8(s).getFullYear() !== new Date().getFullYear() ? " ’" + String(d8(s).getFullYear()).slice(2) : "");  // far-out dates carry their year
+const fmtTime = t => { let [h, m] = t.split(":").map(Number); const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return h + (m ? ":" + String(m).padStart(2, "0") : "") + " " + ap; };
+const safeUrl = u => (typeof u === "string" && /^https?:\/\//i.test(u)) ? u : null;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const norm = s => s.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("latinshows_" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("latinshows_" + k, JSON.stringify(v)); } catch (e) {} },
+};
+
+// One tab per city; #nyc / #la / #miami deep-links to a tab.
+const CITIES = DATA.cities;
+const HASH = { nyc: "nyc", la: "la", miami: "mia", mia: "mia" };
+const SLUG = { nyc: "nyc", la: "la", mia: "miami" };
+const route = () => { const [c, pg] = location.hash.slice(1).split("/"); return { city: HASH[c], page: pg === "announced" ? "new" : c ? "week" : null }; };
+let cityKey = route().city || store.get("city", "nyc");
+if (!CITIES.some(c => c.key === cityKey)) cityKey = "nyc";
+let city = CITIES.find(c => c.key === cityKey);
+let shows = city.shows;
+// Window: today through fourteen days ahead, by the viewer's clock, within the data we have.
+const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const now = new Date(); now.setHours(0, 0, 0, 0);
+const winStart = new Date(now);
+const winEnd = new Date(now); winEnd.setDate(now.getDate() + 30);
+const FROM = iso(winStart) > DATA.week[0] ? iso(winStart) : DATA.week[0];
+const TO = iso(winEnd) < DATA.week[1] ? iso(winEnd) : DATA.week[1];
+const TODAY_ISO = iso(now);
+const STALE = FROM > TO;  // the page hasn't been rebuilt in over a week: the window is past the data
+for (const c of CITIES) c.shows = c.shows.filter(s => s.date >= FROM && s.date <= TO);
+shows = city.shows;
+// Announcements: shows the refresh first saw on Just Announced, or that went up mid-week,
+// within the last 30 days. "New" = first seen in the last 24 hours (viewer's clock).
+const NEW_SINCE = Date.now() - 864e5;
+const isNew = s => !!s.firstSeen && Date.parse(s.firstSeen) > NEW_SINCE;
+for (const c of CITIES) {
+  const ids = new Set();
+  c.feed = [...(c.announced || []), ...c.shows.filter(s => s.firstSeen)].filter(s => s.date >= TODAY_ISO && !ids.has(s.id) && ids.add(s.id));
+  c.all = [...c.shows, ...c.feed.filter(s => !c.shows.some(x => x.id === s.id))];  // for hearts and calendar lookups
+}
+const weekDays = [];
+for (let d = d8(FROM); d <= d8(TO); d.setDate(d.getDate() + 1)) {
+  weekDays.push(d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"));
+}
+
+let state = { page: route().page || "week", view: store.get("view2", "date"), day: "all", q: "", noSupport: false, ours: false,
+  group: store.get("annGroup", "found") };
+if (!["date", "venue", "saved"].includes(state.view)) state.view = "date";
+if (!["found", "date", "onsale"].includes(state.group)) state.group = "found";
+// Sort direction per grouping; clicking the selected one flips it. Day found starts newest
+// first, show date soonest first.
+const annDir = Object.assign({ found: "desc", date: "asc", onsale: "desc" }, store.get("annDir", {}));
+const syncHash = () => { try { history.replaceState(null, "", "#" + SLUG[cityKey] + (state.page === "new" ? "/announced" : "")); } catch (e) {} };
+let saved = new Set(store.get("saved", []));
+
+/* static copy */
+document.getElementById("cities").innerHTML = CITIES.map(c =>
+  `<button class="city" data-city="${c.key}" aria-pressed="false">${esc(c.name)}<small>${c.shows.length}</small></button>`).join("");
+function setCity(key) {
+  city = CITIES.find(c => c.key === key); cityKey = key; shows = city.shows;
+  store.set("city", key);
+  syncHash();
+  render();
+}
+document.getElementById("cities").addEventListener("click", e => {
+  const b = e.target.closest(".city"); if (b && b.dataset.city !== cityKey) setCity(b.dataset.city);
+});
+function setPage(pg) { state.page = pg; syncHash(); render(); window.scrollTo(0, 0); }
+document.getElementById("pages").addEventListener("click", e => {
+  const a = e.target.closest("a"); if (!a) return;
+  e.preventDefault(); if (a.dataset.page !== state.page) setPage(a.dataset.page);
+});
+window.addEventListener("hashchange", () => {
+  const r = route();
+  if (r.city && r.city !== cityKey && CITIES.some(c => c.key === r.city)) { cityKey = r.city; city = CITIES.find(c => c.key === r.city); shows = city.shows; store.set("city", r.city); }
+  if (r.page) state.page = r.page;
+  render();
+});
+
+
+
+/* chips */
+function chip(label, key, val, extra) {
+  return `<button class="chip" data-${key}="${esc(val)}" aria-pressed="false">${label}${extra ? `<small>${extra}</small>` : ""}</button>`;
+}
+document.getElementById("dayChips").innerHTML =
+  chip("All days", "day", "all") + weekDays.map(d => chip(dow(d), "day", d, md(d))).join("");
+
+const billPos = (s, a) => { const i = [s.headliner, ...s.support].indexOf(a); return i < 0 ? 99 : i; };
+const agentsOf = s => [...new Set(s.clients.flatMap(c => [...(c.agents || []), ...(c.service || [])]))];
+// "Agents  Agent One, Agent Two (Service Agent)"; each act named when a bill has more than one client.
+const agentsLine = s => !agentsOf(s).length ? "" : `<div class="agents-line" title="${esc(agentsOf(s).join(", "))}"><span class="label">Agents</span>${
+  [...s.clients].sort((a, b) => billPos(s, a.artist) - billPos(s, b.artist)).map(c => (s.clients.length > 1 ? `<em>${esc(c.artist)}:</em> ` : "") + ((c.agents || []).map(esc).join(", ") || "—") +
+    ((c.service || []).length ? ` <span class="svc">(${c.service.map(esc).join(", ")})</span>` : "")).join(" · ")}</div>`;
+
+/* filtering */
+// The cap slider: two ends on these stops. A room of unknown size shows only at full width.
+const CAP_STOPS = [0, 100, 250, 500, 1000, 2000, 3500, 5000, 10000, 20000, Infinity];
+const capSel = Object.assign({ lo: 0, hi: 10 }, store.get("cap", {}));
+const capFull = () => capSel.lo === 0 && capSel.hi === 10;
+const capOk = s => capFull() || (s.cap != null && s.cap >= CAP_STOPS[capSel.lo] && s.cap <= CAP_STOPS[capSel.hi]);
+const capNum = n => n >= 1000 ? (n / 1000).toLocaleString("en-US", { maximumFractionDigits: 1 }) + "k" : String(n);
+const capText = () => capFull() ? "Any" : capSel.hi === 10 ? capNum(CAP_STOPS[capSel.lo]) + "+" : capSel.lo === 0 ? "Up to " + capNum(CAP_STOPS[capSel.hi]) : capNum(CAP_STOPS[capSel.lo]) + "–" + capNum(CAP_STOPS[capSel.hi]);
+function syncCap() {
+  const lo = document.getElementById("capLo"), hi = document.getElementById("capHi");
+  lo.value = capSel.lo; hi.value = capSel.hi;
+  document.getElementById("capFill").style.cssText = `left:${capSel.lo * 10}%;right:${100 - capSel.hi * 10}%`;
+  document.getElementById("capVal").textContent = capText();
+  document.getElementById("capBox").classList.toggle("on", !capFull());
+  lo.setAttribute("aria-valuetext", capText()); hi.setAttribute("aria-valuetext", capText());
+}
+
+// Favorite venues: [city, venue as the page spells it, heading for the copy-as-text export].
+const FAV_VENUES = [
+  ["nyc", "Palladium Times Square"], ["nyc", "Sony Hall"], ["nyc", "Terminal 5"], ["nyc", "UBS Arena"], ["nyc", "Prudential Center"],
+  ["la", "YouTube Theater"], ["la", "The Novo"], ["la", "Hollywood Palladium"], ["la", "The Wiltern"], ["la", "Honda Center"],
+  ["mia", "The Fillmore Miami Beach", "FILLMORE"], ["mia", "Kaseya Center"], ["mia", "Watsco Center"], ["mia", "James L. Knight Center", "KNIGHT CENTER"],
+]
+const favKey = (k, v) => k + "|" + v;
+const FAV = new Map(FAV_VENUES.map(([k, v, h], i) => [favKey(k, v), { i, head: h || v.toUpperCase() }]));
+const isFav = (s, c) => FAV.has(favKey(c.key, s.venue));
+
+// A headliner naming three or more artists ("Medeski, Martin, Metzger & Cline") is a shared
+// bill: there is no separate support, but it isn't a solo show either.
+const coBill = s => !s.support.length && (s.headliner.match(/,/g) || []).length >= 2;
+
+function matches(s) {
+  if (state.page === "week" && state.day !== "all" && s.date !== state.day) return false;  // announcements span months, not the day chips
+  if (state.noSupport && (s.support.length || coBill(s))) return false;
+  if (!capOk(s)) return false;
+  if (state.ours && !s.clients.length) return false;
+  if (state.page === "week" && state.view === "saved" && !saved.has(s.id)) return false;
+  if (state.q) {
+    const hay = norm([s.headliner, ...s.support, s.venue, ...agentsOf(s)].join(" "));
+    if (!norm(state.q).split(/\s+/).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+
+/* Identical bill at the same venue on back-to-back nights → one row (venue view only). */
+function foldRuns(list) {
+  const key = s => [s.venue, s.time, s.headliner, ...s.support].join("|").toLowerCase();
+  const out = [];
+  for (const s of list) {
+    const prev = out.find(r => key(r) === key(s) && (d8(s.date) - d8(r.dates[r.dates.length - 1])) === 864e5);
+    if (prev) prev.dates.push(s.date), prev.ids.push(s.id);
+    else out.push({ ...s, dates: [s.date], ids: [s.id] });
+  }
+  return out;
+}
+
+const CAL = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/></svg>';
+
+/* Calendar export (.ics). A show's time is venue-local; it is converted to UTC so every
+   calendar app (Outlook included) places it correctly in the viewer's own time zone. */
+const TZ = { nyc: "America/New_York", la: "America/Los_Angeles", mia: "America/New_York" };
+// Offset of zone tz at instant ms, in ms: wall-clock time there minus UTC.
+function tzOffset(ms, tz) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23",
+    year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" })
+    .formatToParts(new Date(ms)).map(x => [x.type, x.value]));
+  return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - ms;
+}
+// Wall-clock date + time in tz -> the real instant (checked twice to get DST edges right).
+function zonedToUtc(date, time, tz) {
+  const [y, mo, d] = date.split("-").map(Number), [h, mi] = time.split(":").map(Number);
+  const wall = Date.UTC(y, mo - 1, d, h, mi);
+  let ms = wall - tzOffset(wall, tz);
+  ms = wall - tzOffset(ms, tz);
+  return ms;
+}
+const icsUtc = ms => new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+const icsDate = d => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
+const icsText = v => String(v).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+// Fold at 75 bytes (not characters): accented names are multi-byte in UTF-8.
+const icsFold = line => {
+  const enc = new TextEncoder(), out = []; let cur = "", n = 0;
+  for (const ch of line) {
+    const w = enc.encode(ch).length;
+    if (n + w > (out.length ? 74 : 75)) { out.push(cur); cur = ""; n = 0; }
+    cur += ch; n += w;
+  }
+  out.push(cur);
+  return out.join("\r\n ");
+};
+function icsEvent(s, stamp, c = city) {  // c: the show's city, for its time zone and name
+  const day = s.date.replace(/-/g, "");
+  const lines = ["BEGIN:VEVENT", `UID:${s.id.replace(/[^\w:-]/g, "")}@latin-shows`, `DTSTAMP:${stamp}`];
+  if (s.time) {
+    const start = zonedToUtc(s.date, s.time, TZ[c.key]);
+    lines.push(`DTSTART:${icsUtc(start)}`, `DTEND:${icsUtc(start + 3 * 36e5)}`);  // assume a three-hour night
+  } else {  // no listed time: an all-day entry on its date
+    const next = d8(s.date); next.setDate(next.getDate() + 1);
+    lines.push(`DTSTART;VALUE=DATE:${day}`, `DTEND;VALUE=DATE:${icsDate(next)}`);
+  }
+  const ours = s.clients.map(c => c.artist);
+  const desc = [s.support.length ? "With " + s.support.join(", ") : "", ours.length ? "Roster: " + ours.join(", ") : "", s.ticketUrl || ""].filter(Boolean).join("\n");
+  lines.push(`SUMMARY:${icsText(s.headliner + (s.support.length ? " + " + s.support.join(", ") : ""))}`,
+             `LOCATION:${icsText(s.venue + ", " + c.name)}`);
+  if (desc) lines.push(`DESCRIPTION:${icsText(desc)}`);
+  if (safeUrl(s.ticketUrl)) lines.push(`URL:${s.ticketUrl}`);
+  lines.push("END:VEVENT");
+  return lines.map(icsFold).join("\r\n");
+}
+function downloadIcs(list, name) {  // list: shows, or [show, city] pairs
+  const now = new Date();
+  const stamp = now.toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
+  const body = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//latin-shows//Latin Shows//EN", "CALSCALE:GREGORIAN",
+    `X-WR-CALNAME:${icsText(name)}`, ...list.map(x => Array.isArray(x) ? icsEvent(x[0], stamp, x[1]) : icsEvent(x, stamp)), "END:VCALENDAR"].join("\r\n") + "\r\n";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([body], { type: "text/calendar;charset=utf-8" }));
+  a.download = (name.normalize("NFKD").replace(/[^\w .-]+/g, "").trim().replace(/\s+/g, "-") || "show") + ".ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 30000);  // Safari reads the blob late
+}
+// Hearted shows in every city (this week and announced), as [show, city] pairs for the export button.
+const favorites = () => CITIES.flatMap(c => c.all.filter(s => saved.has(s.id)).map(s => [s, c]));
+if (window.claude) document.body.classList.add("no-ics");
+
+const HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z"/></svg>';
+
+// Ticketmaster's details (ticketmaster.py): price range, an on-sale still to come, status.
+const money = (n, cur) => (cur === "USD" || !cur ? "$" : cur + " ") + (Number.isInteger(n) ? n : n.toFixed(2));
+const priceOf = s => { const p = s.tm && s.tm.price; if (!p || p[0] == null) return ""; return p[1] != null && p[1] !== p[0] ? money(p[0], p[2]) + "–" + money(p[1], p[2]).replace(/^\$/, "") : money(p[0], p[2]); };
+const notOnSale = s => !!(s.tm && s.tm.onsale && Date.parse(s.tm.onsale) > Date.now());
+// The next sale moment still to come; with `always`, the general on-sale even once it has passed.
+const onsaleOf = (s, always) => {
+  const t = s.tm && (notOnSale(s) ? ["Not on sale ·", s.tm.presale && Date.parse(s.tm.presale) > Date.now() ? s.tm.presale : s.tm.onsale]
+    : always && s.tm.onsale ? ["On sale since", s.tm.onsale] : null);
+  if (!t) return "";
+  const d = new Date(t[1]), o = { timeZone: TZ[city.key] };
+  return `${t[0]} ${d.toLocaleDateString("en-US", { ...o, month: "numeric", day: "numeric" })} ${d.toLocaleTimeString("en-US", { ...o, hour: "numeric", minute: "2-digit" }).replace(":00", "").replace(" ", "")}`;
+};
+const STATUS = { cancelled: "Cancelled", postponed: "Postponed", rescheduled: "Rescheduled" };
+
+function row(s, withVenue) {
+  const dates = s.dates || [s.date];
+  const day = dates.length > 1 ? dow(dates[0]) + "–" + dow(dates[dates.length - 1]) : dow(dates[0]);
+  const ids = s.ids || [s.id];
+  const on = ids.every(id => saved.has(id));
+  const mine = new Set(s.clients.map(c => c.artist.toLowerCase()));
+  const name = a => mine.has(a.toLowerCase()) ? `<span class="mine">${esc(a)}</span>` : esc(a);
+  const support = s.support.length
+    ? `<div class="support" title="${esc(s.support.join(", "))}"><span class="acts">${s.support.map(a => `<span class="act">${name(a)}</span>`).join("<i>·</i>")}</span></div>`
+    : coBill(s) ? `<div class="support" title="Several artists billed together"><span class="acts shared">Shared bill</span></div>`
+    : `<div class="support none"><span class="acts">No support listed</span></div>`;
+  return `<div class="row${s.clients.length ? " ours" : ""}${ids.some(id => openRows.has(id)) ? " open" : ""}" data-ids="${ids.join(",")}" tabindex="0">
+    <div class="when label${dates.length > 1 ? " multi" : ""}"><b>${day}</b><span>${dates.length > 1 ? md(dates[0]) + "–" + (d8(dates[0]).getMonth() === d8(dates[dates.length - 1]).getMonth() ? d8(dates[dates.length - 1]).getDate() : md(dates[dates.length - 1])) : mdy(dates[0])}</span></div>
+    <div class="bill">
+      <div class="head">${safeUrl(s.ticketUrl) ? `<a${mine.has(s.headliner.toLowerCase()) ? ' class="mine"' : ""} href="${esc(s.ticketUrl)}" target="_blank" rel="noopener">${esc(s.headliner)}</a>` : name(s.headliner)}${isNew(s) ? '<span class="new-tag">New</span>' : ""}${s.tm && STATUS[s.tm.status] ? `<span class="status-tag">${STATUS[s.tm.status]}</span>` : ""}${s.tmOnly ? '<span class="status-tag" title="Listed on Ticketmaster">TM</span>' : ""}</div>
+      ${support}
+      ${agentsLine(s)}
+      ${withVenue ? `<div class="at" title="${esc(s.venue)}${s.cap ? " · about " + s.cap.toLocaleString("en-US") + " cap" : ""}"><b>${esc(s.venue)}</b></div>` : ""}
+    </div>
+    <div class="meta">
+      ${onsaleOf(s, state.page === "new" && state.group === "onsale") ? `<span class="onsale${notOnSale(s) ? "" : " past"}" title="${notOnSale(s) ? (s.tm.presale && Date.parse(s.tm.presale) > Date.now() ? "Presale opens then; general on-sale " + new Date(s.tm.onsale).toLocaleString() : "General on-sale opens then") : "General on-sale opened then"}">${esc(onsaleOf(s, state.page === "new" && state.group === "onsale"))}</span>` : ""}
+      ${priceOf(s) ? `<span class="price" title="Ticketmaster price range">${esc(priceOf(s))}</span>` : ""}
+      <span class="t">${s.time ? fmtTime(s.time) : ""}</span>
+      ${s.age ? `<span>${esc(s.age)}</span>` : ""}
+      <button class="cal" data-ids="${ids.join(",")}" aria-label="Add ${esc(s.headliner)} to your calendar" title="Add to calendar">${CAL}</button>
+      <button class="save" data-ids="${ids.join(",")}" aria-pressed="${on}" aria-label="${on ? "Unsave" : "Save"} ${esc(s.headliner)}">${HEART}</button>
+    </div>
+  </div>`;
+}
+
+function renderVenues(list) {
+  let html = "";
+  {
+    const byVenue = new Map();
+    for (const s of list) (byVenue.get(s.venue) || byVenue.set(s.venue, []).get(s.venue)).push(s);
+    const venues = [...byVenue.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+    html += `<div class="sect-head"><h2>Venues</h2><span class="label">${venues.length} venue${venues.length === 1 ? "" : "s"} · ${list.length} show${list.length === 1 ? "" : "s"}</span></div>`;
+    for (const [v, vs] of venues) {
+      const tier = vs[0].tier;
+      html += `<div class="venue">
+        <div class="venue-name"><h3>${esc(v)}</h3><span class="label">${vs.length} show${vs.length === 1 ? "" : "s"}${tier ? " · " + tier : ""}</span></div>
+        <div class="rows">${foldRuns(vs).map(s => row(s, false)).join("")}</div>
+      </div>`;
+    }
+  }
+  return html;
+}
+
+function renderDates(list, desc) {
+  let html = "";
+  // Every date in the list, in order: this week's days, or weeks out for announcements and saved shows.
+  const days = [...new Set(list.map(s => s.date))].sort();
+  for (const d of desc ? days.reverse() : days) {
+    const inD = list.filter(s => s.date === d).sort((a, b) => (a.time || "99").localeCompare(b.time || "99") || a.venue.localeCompare(b.venue));  // no time (added from the agency list) sorts last
+    html += `<div class="sect-head"><h2>${FULLDAY[d8(d).getDay()]}, ${mdy(d)}${d === TODAY_ISO ? " <em>· Today</em>" : ""}</h2><span class="label">${inD.length} show${inD.length === 1 ? "" : "s"}</span></div>
+      <div class="list">${inD.map(s => row(s, true)).join("")}</div>`;
+  }
+  return html;
+}
+
+// Just announced by show date: one list, no date headings, since every row shows its date.
+function renderByShowDate(list, desc) {
+  const sorted = [...list].sort((a, b) => a.date.localeCompare(b.date) || (a.time || "99").localeCompare(b.time || "99") || a.venue.localeCompare(b.venue));
+  return `<div class="list by-date">${(desc ? sorted.reverse() : sorted).map(s => row(s, true)).join("")}</div>`;
+}
+
+// Just announced by general on-sale time (Ticketmaster's), latest first by default, so what
+// isn't on sale yet leads. Shows with no on-sale date (not on Ticketmaster) follow, by show date.
+function renderByOnsale(list, desc) {
+  const has = list.filter(s => s.tm && s.tm.onsale), none = list.filter(s => !(s.tm && s.tm.onsale));
+  const sorted = has.sort((a, b) => a.tm.onsale.localeCompare(b.tm.onsale) || a.date.localeCompare(b.date));
+  if (desc) sorted.reverse();
+  const rest = none.sort((a, b) => a.date.localeCompare(b.date) || (a.time || "99").localeCompare(b.time || "99"));
+  return `<div class="list by-date">${sorted.map(s => row(s, true)).join("")}</div>` +
+    (rest.length ? `<div class="sect-head"><div><h2>No on-sale date</h2><p class="gap-note">Not on Ticketmaster, so no on-sale time to sort by.</p></div><span class="label">${rest.length} show${rest.length === 1 ? "" : "s"}</span></div>
+      <div class="list">${rest.map(s => row(s, true)).join("")}</div>` : "");
+}
+
+// Just announced, grouped by the day the refresh found each show (viewer's clock), newest first.
+function renderFound(list) {
+  const day = s => iso(new Date(s.firstSeen));
+  const yest = new Date(now); yest.setDate(now.getDate() - 1);
+  let html = "";
+  const days = [...new Set(list.map(day))].sort();
+  for (const d of annDir.found === "desc" ? days.reverse() : days) {
+    const inD = list.filter(s => day(s) === d).sort((a, b) => a.date.localeCompare(b.date) || (a.time || "99").localeCompare(b.time || "99") || a.venue.localeCompare(b.venue));
+    const label = d === TODAY_ISO ? "Announced today" : d === iso(yest) ? "Announced yesterday" : `Announced ${FULLDAY[d8(d).getDay()]}, ${md(d)}`;
+    const since = inD.map(s => s.since).filter(Boolean).sort()[0];  // the scan before this one was blocked
+    html += `<div class="sect-head"><div><h2>${label}</h2>${since ? `<p class="gap-note">First check since ${dow(iso(new Date(since)))} ${md(iso(new Date(since)))}, so some of these went up in between.</p>` : ""}</div><span class="label">${inD.length} show${inD.length === 1 ? "" : "s"}</span></div>
+      <div class="list">${inD.map(s => row(s, true)).join("")}</div>`;
+  }
+  return html;
+}
+
+function render() {
+  document.querySelectorAll(".city").forEach(b => b.setAttribute("aria-pressed", b.dataset.city === cityKey));
+  const stale = city.checked < TODAY_ISO;  // the last refresh for this city didn't get through
+  document.getElementById("checked").textContent = "Checked " + dow(city.checked) + " " + md(city.checked) + (stale ? " · may be out of date" : "");
+  document.getElementById("checked").title = Object.entries(city.sources || {}).map(([k, v]) => `${k}: ${v === TODAY_ISO ? "today" : dow(v) + " " + md(v)}`).join("\n");
+  document.body.classList.toggle("page-new", state.page === "new");
+  document.querySelectorAll("#pages a").forEach(a => {
+    a.href = "#" + SLUG[cityKey] + (a.dataset.page === "new" ? "/announced" : "");
+    a.toggleAttribute("aria-current", a.dataset.page === state.page); if (a.dataset.page === state.page) a.setAttribute("aria-current", "page");
+  });
+  document.getElementById("range").textContent = state.page === "new" ? "Just announced" : STALE ? "Listings out of date" : md(FROM) + " – " + md(TO);
+  document.querySelectorAll(".tab[data-view]").forEach(t => t.setAttribute("aria-selected", t.dataset.view === state.view));
+  document.querySelectorAll(".tab[data-group]").forEach(t => {
+    const on = t.dataset.group === state.group, desc = annDir[t.dataset.group] === "desc";
+    t.setAttribute("aria-selected", on);
+    t.querySelector(".dir").textContent = on ? (desc ? " ↓" : " ↑") : "";
+    t.title = on ? `${t.dataset.group === "found" ? (desc ? "Newest" : "Oldest") : t.dataset.group === "onsale" ? (desc ? "Latest on-sale" : "Earliest on-sale") : (desc ? "Furthest out" : "Soonest")} first. Click to reverse.` : "";
+  });
+  document.querySelectorAll("[data-day]").forEach(c => c.setAttribute("aria-pressed", c.dataset.day === state.day));
+  document.getElementById("noSupport").setAttribute("aria-pressed", state.noSupport);
+  syncCap();
+  document.getElementById("oursOnly").setAttribute("aria-pressed", state.ours);
+
+  const savedHere = city.all.filter(s => saved.has(s.id)).length;
+  document.getElementById("savedN").textContent = savedHere;
+  document.getElementById("newN").textContent = city.feed.filter(isNew).length || "";
+
+  // Which shows the view draws from: the announcement log, this week, or everything hearted.
+  const pool = state.page === "new" ? city.feed : state.view === "saved" ? city.all : shows;
+  const list = pool.filter(matches);
+  const favs = favorites().length;
+  document.getElementById("icsBtn").innerHTML = `${CAL}Add ${favs} favorite${favs === 1 ? "" : "s"} to calendar`;
+  document.getElementById("icsBtn").hidden = !favs;  // appears once something is hearted
+  const nv = new Set(list.map(s => s.venue)).size;
+  const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+  document.getElementById("count").textContent = plural(list.length, "show") + " · " + plural(nv, "venue");
+
+  const out = document.getElementById("out");
+  if (!list.length) {
+    out.innerHTML = `<p class="empty">${
+      state.page === "new" ? `Nothing ${state.ours || state.noSupport || state.q ? "matching these filters " : ""}announced${capFull() ? "" : " at rooms of that size"} in ${esc(city.name)} in the last 30 days. The log fills in each morning as new shows go up.`
+      : STALE ? `These listings only run through ${md(DATA.week[1])}. Check back after the next update.`
+      : state.view === "saved" && !savedHere ? `Nothing saved in ${esc(city.name)} yet. Tap the heart on any show to keep it here.`
+      : "No shows match these filters. Try another day, turn off the toggles, or clear the search."}</p>`;
+    return;
+  }
+  out.innerHTML = state.page === "new" ? (state.group === "found" ? renderFound(list) : state.group === "onsale" ? renderByOnsale(list, annDir.onsale === "desc") : renderByShowDate(list, annDir.date === "desc"))
+    : state.view === "venue" ? renderVenues(list) : renderDates(list);
+}
+
+// Export: the Just announced log as a CSV or a printable PDF, with chosen cities, announcement
+// window, show dates, columns and sort. Agents export only when their column is ticked.
+const XP_COLS = [
+  ["announced", "Announced", true, s => s.firstSeen ? iso(new Date(s.firstSeen)) : ""],
+  ["date", "Show date", true, s => xpShowDate(s)],
+  ["headliner", "Headliner", "always", s => s.headliner],
+  ["support", "Support", "always", s => s.support.join(", ") || (coBill(s) ? "Shared bill" : "")],
+  ["venue", "Venue", "always", s => s.venue],
+  ["city", "City", "always", (s, c) => c.name],
+  ["age", "Age", false, s => s.age || ""],
+];
+// "Sat, Mar 27, 2027 · 8 PM": day, date and time in one column
+const xpShowDate = s => { const x = d8(s.date);
+  return `${FULLDAY[x.getDay()].slice(0, 3)}, ${MONTHS[x.getMonth()]} ${x.getDate()}, ${x.getFullYear()}` + (s.time ? " · " + fmtTime(s.time) : ""); };
+const xpLink = s => [s.ticketUrl, s.tm && s.tm.url].find(u => u && safeUrl(u)) || "";
+const xpWhen = (t, c) => { const d = new Date(t), o = { timeZone: TZ[c.key] };
+  return d.toLocaleDateString("en-CA", o) + " " + d.toLocaleTimeString("en-US", { ...o, hour: "numeric", minute: "2-digit" }); };
+const xpPrefs = Object.assign({ cols: XP_COLS.filter(c => c[2]).map(c => c[0]), since: "7", sort: "found" }, store.get("xp", {}));
+xpPrefs.cols = xpPrefs.cols.filter(k => XP_COLS.some(c => c[0] === k));  // columns since retired
+if (xpPrefs.sort === "onsale") xpPrefs.sort = "found";
+const xpEl = id => document.getElementById(id);
+// The export's own cap slider: starts from the page's, changes only the export.
+const xpCapSel = { lo: 0, hi: 10 };
+const xpCapFull = () => xpCapSel.lo === 0 && xpCapSel.hi === 10;
+const xpCapOk = s => xpCapFull() || (s.cap != null && s.cap >= CAP_STOPS[xpCapSel.lo] && s.cap <= CAP_STOPS[xpCapSel.hi]);
+const xpCapText = () => xpCapFull() ? "Any" : xpCapSel.hi === 10 ? capNum(CAP_STOPS[xpCapSel.lo]) + "+" : xpCapSel.lo === 0 ? "up to " + capNum(CAP_STOPS[xpCapSel.hi]) : capNum(CAP_STOPS[xpCapSel.lo]) + "–" + capNum(CAP_STOPS[xpCapSel.hi]);
+function xpCapSync() {
+  xpEl("xpCapLo").value = xpCapSel.lo; xpEl("xpCapHi").value = xpCapSel.hi;
+  xpEl("xpCapFill").style.cssText = `left:${xpCapSel.lo * 10}%;right:${100 - xpCapSel.hi * 10}%`;
+  xpEl("xpCapVal").textContent = xpCapText();
+  xpEl("xpCapBox").classList.toggle("on", !xpCapFull());
+}
+const xpNoSupport = s => !s.support.length && !coBill(s);
+const xpList = () => (document.querySelector('input[name="xpList"]:checked') || {}).value || "new";
+function xpInit() {
+  document.querySelector(`input[name="xpList"][value="${state.page === "new" ? "new" : "week"}"]`).checked = true;
+  xpEl("xpSinceBox").hidden = xpList() !== "new";
+  xpEl("xpSort").value = xpList() === "week" && xpPrefs.sort === "found" ? "date" : xpPrefs.sort;
+  xpEl("xpCities").innerHTML = CITIES.map(c => `<label><input type="checkbox" value="${c.key}"${c.key === city.key ? " checked" : ""}> ${esc(c.name)}</label>`).join("");
+  xpEl("xpCols").innerHTML = XP_COLS.filter(c => c[2] !== "always").map(([k, label]) => `<label><input type="checkbox" value="${k}"${xpPrefs.cols.includes(k) ? " checked" : ""}> ${esc(label)}</label>`).join("");
+  xpEl("xpSince").value = xpPrefs.since; xpEl("xpSort").value = xpList() === "week" && xpPrefs.sort === "found" ? "date" : xpPrefs.sort;
+  xpEl("xpSinceDate").hidden = xpPrefs.since !== "date";
+  xpEl("xpTextOut").hidden = true;
+  xpEl("xpNoSup").checked = !!state.noSupport;  // start from the page's settings, then change freely
+  const opt = (i, end) => `<option value="${i}">${i === 0 && end === "lo" ? "Any" : i === 10 ? "Any" : CAP_STOPS[i].toLocaleString("en-US")}</option>`;
+  xpEl("xpTeam").checked = !!state.ours;
+  Object.assign(xpCapSel, capSel); xpCapSync();
+  xpCount();
+}
+function xpRows() {
+  const keys = [...xpEl("xpCities").querySelectorAll("input:checked")].map(i => i.value);
+  const v = xpEl("xpSince").value;
+  const week = xpList() === "week";
+  const since = week ? -Infinity : v === "date" ? (xpEl("xpSinceDate").value ? new Date(xpEl("xpSinceDate").value + "T00:00").getTime() : 0) : Date.now() - (+v) * 864e5;
+  const from = xpEl("xpFrom").value, to = xpEl("xpTo").value;
+  let rows = [];
+  for (const c of CITIES.filter(c => keys.includes(c.key)))
+    for (const s of week ? c.shows : c.feed) {
+      if (!week && (!s.firstSeen || Date.parse(s.firstSeen) < since)) continue;
+      if ((from && s.date < from) || (to && s.date > to)) continue;
+      if (xpEl("xpFav").checked && !isFav(s, c)) continue;
+      if (xpEl("xpNoSup").checked && !xpNoSupport(s)) continue;
+      if (!xpCapOk(s)) continue;
+      if (xpEl("xpTeam").checked && !s.clients.length) continue;
+      if (state.q && !norm([s.headliner, ...s.support, s.venue, ...agentsOf(s)].join(" ")).includes(norm(state.q))) continue;
+      rows.push([s, c]);
+    }
+  const by = xpEl("xpSort").value;
+  const key = ([s]) => by === "found" ? -Date.parse(s.firstSeen) : 0;
+  rows.sort((a, b) => key(a) - key(b) || a[0].date.localeCompare(b[0].date) || (a[0].time || "99").localeCompare(b[0].time || "99"));
+  const cols = XP_COLS.filter(([k, , fixed]) => fixed === "always" || xpEl("xpCols").querySelector(`input[value="${k}"]`).checked);
+  return { rows, cols, keys };
+}
+function xpCount() {
+  const { rows } = xpRows();
+  xpEl("xpN").textContent = rows.length + " show" + (rows.length === 1 ? "" : "s");
+  xpPrefs.cols = [...xpEl("xpCols").querySelectorAll("input:checked")].map(i => i.value);
+  xpPrefs.since = xpEl("xpSince").value; xpPrefs.sort = xpEl("xpSort").value; store.set("xp", xpPrefs);
+}
+function xpTitle(keys) {
+  const v = xpEl("xpSince").value;
+  const when = v === "date" ? "since " + (xpEl("xpSinceDate").value || "the start") : v === "1" ? "in the last 24 hours" : `in the last ${v} days`;
+  return `${xpList() === "week" ? `Shows ${md(FROM)} – ${md(TO)}` : `Shows announced ${when}`} · ${CITIES.filter(c => keys.includes(c.key)).map(c => c.name).join(", ")}` + (xpCapFull() ? "" : ` · cap ${xpCapText()}`);
+}
+function xpSave(body, type, name) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([body], { type }));
+  a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+}
+xpEl("xpCsv").addEventListener("click", () => {
+  const { rows, cols } = xpRows();
+  const cell = v => /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
+  // The headliner links to the tickets: Excel and Google Sheets show a HYPERLINK cell as a link.
+  const q = v => String(v).replace(/"/g, '""');
+  const val = (col, s, c) => col[0] === "headliner" && xpLink(s) ? `=HYPERLINK("${q(xpLink(s))}","${q(s.headliner)}")` : col[3](s, c);
+  const csv = [cols.map(c => c[1]), ...rows.map(([s, c]) => cols.map(col => val(col, s, c)))].map(r => r.map(cell).join(",")).join("\r\n");
+  xpSave("\ufeff" + csv, "text/csv;charset=utf-8", `announcements-${TODAY_ISO}.csv`);  // the BOM keeps Excel on UTF-8
+});
+// The PDF is laid out for reading, not a copy of the CSV: grouped by city when there are
+// several, date and time in one column, the bill as headliner (linked to tickets) over its
+// support, the room over its size, on-sale details with a "Not on sale yet" tag.
+function xpPdfDoc(rows, cols, keys) {
+  const on = k => cols.some(c => c[0] === k);
+  const many = keys.length > 1;
+  const C = [];
+  if (on("announced")) C.push(["Announced", "n", s => s.firstSeen ? esc(md(iso(new Date(s.firstSeen)))) : ""]);
+  if (on("date")) C.push(["Show", "n", s => esc(xpShowDate(s).replace(/, \d{4}( ·|$)/, (m, t) => new Date().getFullYear() === d8(s.date).getFullYear() ? (t || "") : m))]);
+  if (on("headliner") || on("support")) C.push(["Bill", "bill", s => {
+    const h = on("headliner") ? (xpLink(s) ? `<a class="hl" href="${esc(xpLink(s))}">${esc(s.headliner)}</a>` : `<span class="hl">${esc(s.headliner)}</span>`) : "";
+    const sup = on("support") ? (s.support.length ? esc(s.support.join(", ")) : coBill(s) ? "<i>Shared bill</i>" : "") : "";
+    return h + (sup ? `<div class="sub">${on("headliner") ? "with " : ""}${sup}</div>` : "");
+  }]);
+  if (on("venue")) C.push(["Venue", "", s => esc(s.venue)]);
+  if (on("city") && !many) C.push(["City", "", (s, c) => esc(c.name)]);
+  if (on("age")) C.push(["Age", "n", s => esc(s.age || "")]);
+  for (let i = C.length - 1; i >= 0; i--)  // a column empty in every row only takes room
+    if (C[i][0] !== "Bill" && rows.every(([s, c]) => !C[i][2](s, c))) C.splice(i, 1);
+  const table = list => `<table><thead><tr>${C.map(([h, k]) => `<th class="${k}">${esc(h)}</th>`).join("")}</tr></thead><tbody>${
+    list.map(([s, c]) => `<tr>${C.map(([, k, f]) => `<td class="${k}">${f(s, c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const groups = many ? CITIES.filter(c => keys.includes(c.key)).map(c => [c, rows.filter(r => r[1] === c)]).filter(g => g[1].length) : [[null, rows]];
+  const v = xpEl("xpSince").value;
+  const when = v === "date" ? "since " + (xpEl("xpSinceDate").value ? md(xpEl("xpSinceDate").value) : "the start") : v === "1" ? "in the last 24 hours" : `in the last ${v} days`;
+  const filters = [xpEl("xpFav").checked ? "favorite venues" : "", xpCapFull() ? "" : `rooms ${xpCapText()} cap`, xpEl("xpTeam").checked ? "Roster shows only" : "",
+    xpEl("xpNoSup").checked ? "no support only" : "", state.q ? `matching “${state.q}”` : "",
+    xpEl("xpFrom").value || xpEl("xpTo").value ? `shows ${xpEl("xpFrom").value ? "from " + md(xpEl("xpFrom").value) : ""}${xpEl("xpTo").value ? " to " + md(xpEl("xpTo").value) : ""}` : ""].filter(Boolean);
+  const cities = CITIES.filter(c => keys.includes(c.key)).map(c => c.name).join(", ");
+  const title = xpList() === "week" ? `Shows ${md(FROM)} – ${md(TO)}` : `Shows announced ${when}`;
+  return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>
+    @page { size: letter landscape; margin: 14mm 13mm 15mm;
+      @bottom-left { content: "Just announced · ${esc(cities)}"; font: 7.5pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #8a877e; }
+      @bottom-right { content: counter(page) " / " counter(pages); font: 7.5pt "Helvetica Neue", Helvetica, Arial, sans-serif; color: #8a877e; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 8.6pt/1.38 "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1b1b18; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1.6pt solid #1b1b18; padding-bottom: 7pt; margin-bottom: 4pt; }
+    h1 { font: italic 400 21pt/1.1 Georgia, "Times New Roman", serif; color: #2e7040; margin: 0; }
+    .meta { font-size: 8.6pt; color: #55534c; margin-top: 3pt; }
+    .stamp { text-align: right; font-size: 7.6pt; color: #8a877e; line-height: 1.5; }
+    .stamp b { display: block; font-size: 15pt; color: #1b1b18; font-weight: 500; }
+    h2 { font: 600 10.5pt/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif; margin: 15pt 0 3pt; display: flex; gap: 8pt; align-items: baseline; break-after: avoid; }
+    h2 span { font-weight: 400; color: #8a877e; font-size: 8pt; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { display: table-header-group; }
+    th { font-size: 6.6pt; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: #8a877e; text-align: left; padding: 5pt 9pt 4pt 0; border-bottom: .6pt solid #1b1b18; }
+    td { padding: 4.6pt 9pt 4.6pt 0; border-bottom: .4pt solid #e2dfd6; vertical-align: top; }
+    tr { break-inside: avoid; }
+    .n { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .bill { width: 38%; }
+    .hl { font-weight: 600; font-size: 9.2pt; color: #1b1b18; }
+    a.hl { color: #24603a; text-decoration: none; border-bottom: .5pt solid #9fc1a8; }
+    a { color: #24603a; text-decoration: none; }
+    .sub { color: #6b6a63; font-size: 7.8pt; margin-top: 1pt; }
+    .tag { display: inline-block; margin-top: 2pt; font-size: 6.4pt; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: #2e7040; padding: 1pt 4pt; border-radius: 2pt; }
+    .tag.warn { background: #b3402a; }
+    .foot { margin-top: 10pt; font-size: 7.4pt; color: #8a877e; }
+  </style></head><body>
+  <header><div><h1>${esc(title)}</h1><div class="meta">${esc([cities, ...filters].join(" · "))}</div></div>
+    <div class="stamp"><b>${rows.length.toLocaleString("en-US")} show${rows.length === 1 ? "" : "s"}</b>Exported ${esc(new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }))}</div></header>
+  ${groups.map(([c, list]) => (c ? `<h2>${esc(c.name)} <span>${list.length} show${list.length === 1 ? "" : "s"}</span></h2>` : "") + table(list)).join("")}
+  <p class="foot">${on("headliner") ? "Headliners link to their ticket page. " : ""}Times are local to each city.</p>
+  </body></html>`;
+}
+// A formatted .xlsx: title, filters line, dark header row, banded rows, column widths, wrapped
+// support, frozen header with filter buttons, artists linked to their tickets. ExcelJS loads
+// from cdnjs on first use only.
+const xpScript = src => new Promise((ok, bad) => { const t = document.createElement("script"); t.src = src; t.onload = ok; t.onerror = bad; document.head.appendChild(t); });
+xpEl("xpXlsx").addEventListener("click", async () => {
+  const btn = xpEl("xpXlsx"); btn.textContent = "Preparing…";
+  try {
+    if (!window.ExcelJS) await xpScript("https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js");
+    const { rows, cols, keys } = xpRows();
+    const wb = new ExcelJS.Workbook(), ws = wb.addWorksheet("Shows", { views: [{ state: "frozen", ySplit: 3 }] });
+    const W = { announced: 12, date: 26, headliner: 30, support: 46, venue: 28, city: 14, age: 9, team: 26, link: 44 };
+    ws.columns = cols.map(c => ({ key: c[0], width: W[c[0]] || 16 }));
+    const n = cols.length, last = String.fromCharCode(64 + n);
+    ws.mergeCells(`A1:${last}1`); ws.mergeCells(`A2:${last}2`);
+    ws.getCell("A1").value = xpTitle(keys);
+    ws.getCell("A1").font = { name: "Arial", size: 15, bold: true, color: { argb: "FF2E7040" } };
+    ws.getCell("A2").value = `${rows.length} show${rows.length === 1 ? "" : "s"} · exported ${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} · artists link to tickets`;
+    ws.getCell("A2").font = { name: "Arial", size: 9, italic: true, color: { argb: "FF6B6A63" } };
+    ws.getRow(1).height = 24;
+    const head = ws.getRow(3);
+    cols.forEach((c, i) => { const cell = head.getCell(i + 1); cell.value = c[1];
+      cell.font = { name: "Arial", size: 9, bold: true, color: { argb: "FFFFFFFF" } };
+      cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF1B1B18" } };
+      cell.alignment = { vertical: "middle" }; });
+    head.height = 20;
+    rows.forEach(([s, c], r) => {
+      const row = ws.getRow(r + 4);
+      cols.forEach((col, i) => {
+        const cell = row.getCell(i + 1), v = col[3](s, c);
+        cell.value = col[0] === "headliner" && xpLink(s) ? { text: v, hyperlink: xpLink(s) } : v;
+        cell.font = { name: "Arial", size: 10, bold: col[0] === "headliner",
+          ...(col[0] === "headliner" && xpLink(s) ? { color: { argb: "FF24603A" }, underline: true } : {}) };
+        cell.alignment = { vertical: "top", wrapText: col[0] === "support" };
+        if (r % 2) cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFF4F2EC" } };
+        cell.border = { bottom: { style: "thin", color: { argb: "FFE2DFD6" } } };
+      });
+    });
+    ws.autoFilter = { from: { row: 3, column: 1 }, to: { row: 3, column: n } };
+    const buf = await wb.xlsx.writeBuffer();
+    xpSave(buf, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", `${xpList() === "week" ? "upcoming-shows" : "announcements"}-${TODAY_ISO}.xlsx`);
+    btn.textContent = "Download Excel";
+  } catch (e) { btn.textContent = "Couldn't load, try CSV"; setTimeout(() => { btn.textContent = "Download Excel"; }, 3000); }
+});
+xpEl("xpPdf").addEventListener("click", () => {
+  const { rows, cols, keys } = xpRows();
+  const doc = xpPdfDoc(rows, cols, keys);
+  const f = document.createElement("iframe");  // print from a hidden frame: no pop-up to block
+  f.style.cssText = "position:fixed;width:0;height:0;border:0;right:0;bottom:0";
+  document.body.appendChild(f);
+  f.contentDocument.open(); f.contentDocument.write(doc); f.contentDocument.close();
+  setTimeout(() => { f.contentWindow.focus(); f.contentWindow.print(); setTimeout(() => f.remove(), 60000); }, 250);
+});
+// Copy as text, venue by venue (favorites first, in their order), each show as
+//   * [Artist](ticket link) – Tue 9/29
+function xpTextGroups(rows) {
+  const groups = new Map();
+  for (const [s, c] of rows) {
+    const k = favKey(c.key, s.venue);
+    (groups.get(k) || groups.set(k, { v: s.venue, list: [] }).get(k)).list.push(s);
+  }
+  const rank = k => FAV.has(k) ? FAV.get(k).i : 1e3;
+  const thisYear = new Date().getFullYear();
+  const day = d => { const x = d8(d); return `${FULLDAY[x.getDay()].slice(0, 3)} ${x.getMonth() + 1}/${x.getDate()}${x.getFullYear() !== thisYear ? "/" + String(x.getFullYear()).slice(2) : ""}`; };
+  return [...groups.entries()].sort((a, b) => rank(a[0]) - rank(b[0]) || a[1].v.localeCompare(b[1].v)).map(([k, g]) => ({
+    head: FAV.has(k) ? FAV.get(k).head : g.v.toUpperCase(),
+    items: g.list.sort((a, b) => a.date.localeCompare(b.date) || (a.time || "99").localeCompare(b.time || "99"))
+      .map(s => ({ name: s.headliner, url: xpLink(s), day: day(s.date) })) }));
+}
+// Plain text keeps the "* [Artist](link) – Tue 9/29" form; the rich copy makes each artist a
+// real link, so it pastes as links into email, Google Docs, Notes, Slack and the like.
+const xpText = rows => xpTextGroups(rows).map(g => g.head + "\n\n" +
+  g.items.map(i => `* ${i.url ? `[${i.name}](${i.url})` : i.name} – ${i.day}`).join("\n")).join("\n\n");
+// Inline styles only: Outlook drops <style> blocks and classes, Google Docs keeps inline
+// fonts, sizes, colours and real bullets. Arial 11pt, bold venue headings, linked artists.
+const XP_FONT = "font-family:Arial,Helvetica,sans-serif;font-size:11pt;color:#1b1b18;";
+const xpTextHtml = rows => `<div style="${XP_FONT}">` + xpTextGroups(rows).map((g, n) =>
+  `<p style="${XP_FONT}font-weight:bold;letter-spacing:0.5px;margin:${n ? 16 : 0}px 0 6px 0;">${esc(g.head)}</p>` +
+  `<ul style="${XP_FONT}margin:0 0 0 0;padding-left:22px;">` +
+  g.items.map(i => `<li style="${XP_FONT}margin:0 0 3px 0;">${i.url
+    ? `<a href="${esc(i.url)}" style="${XP_FONT}color:#1155cc;text-decoration:underline;">${esc(i.name)}</a>` : esc(i.name)}` +
+    `<span style="${XP_FONT}color:#5f5d57;"> – ${esc(i.day)}</span></li>`).join("") + "</ul>").join("") + "</div>";
+xpEl("xpText").addEventListener("click", async () => {
+  const rows = xpRows().rows, text = xpText(rows), html = xpTextHtml(rows), box = xpEl("xpTextOut"), btn = xpEl("xpText");
+  box.innerHTML = html; box.hidden = false;
+  let ok = false;
+  try {
+    await navigator.clipboard.write([new ClipboardItem({ "text/html": new Blob([html], { type: "text/html" }), "text/plain": new Blob([text], { type: "text/plain" }) })]);
+    ok = true;
+  } catch (e) {  // older browsers: select the rendered preview and copy that (keeps the links)
+    const r = document.createRange(); r.selectNodeContents(box);
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    try { ok = document.execCommand("copy"); } catch (e2) {}
+    sel.removeAllRanges();
+  }
+  btn.textContent = ok ? "Copied" : "Select and copy below";
+  setTimeout(() => { btn.textContent = "Copy text"; }, 2000);
+});
+xpEl("exportDlg").addEventListener("input", e => {
+  if (e.target.id === "xpCapLo" || e.target.id === "xpCapHi") {
+    let v = +e.target.value;
+    if (e.target.id === "xpCapLo") xpCapSel.lo = Math.min(v, xpCapSel.hi - 1); else xpCapSel.hi = Math.max(v, xpCapSel.lo + 1);  // ends never cross
+    xpCapSync();
+  }
+  if (e.target.name === "xpList") {
+    xpEl("xpSinceBox").hidden = xpList() !== "new";
+    if (xpList() === "week" && xpEl("xpSort").value === "found") xpEl("xpSort").value = "date";
+  }
+  if (e.target.id === "xpSince") xpEl("xpSinceDate").hidden = e.target.value !== "date";
+  xpCount();
+});
+xpEl("exportBtn").addEventListener("click", () => { xpInit(); xpEl("exportDlg").showModal(); });
+
+document.querySelector(".tabs").addEventListener("click", e => {
+  const t = e.target.closest(".tab"); if (!t) return;
+  if (t.dataset.group) {
+    if (t.dataset.group === state.group) { annDir[state.group] = annDir[state.group] === "desc" ? "asc" : "desc"; store.set("annDir", annDir); }
+    else { state.group = t.dataset.group; store.set("annGroup", state.group); }
+  }
+  else {
+    // Saved toggles: a second click goes back to the view you came from.
+    if (t.dataset.view === "saved" && state.view === "saved") state.view = store.get("viewBeforeSaved", "date");
+    else { if (t.dataset.view === "saved") store.set("viewBeforeSaved", state.view); state.view = t.dataset.view; }
+    store.set("view2", state.view);
+  }
+  render();
+});
+document.querySelector(".bar").addEventListener("click", e => {
+  const c = e.target.closest(".chip"); if (!c) return;
+  if (c.dataset.day) state.day = c.dataset.day;
+  render();
+});
+// Always the compact, spreadsheet-style list; click a row to open it out.
+document.body.classList.add("compact");
+document.getElementById("icsBtn").addEventListener("click", () => {
+  const favs = favorites();
+  if (favs.length) downloadIcs(favs, "Favorite shows");
+});
+document.getElementById("noSupport").addEventListener("click", () => { state.noSupport = !state.noSupport; render(); });
+for (const [id, end] of [["capLo", "lo"], ["capHi", "hi"]])
+  document.getElementById(id).addEventListener("input", e => {
+    let v = +e.target.value;
+    if (end === "lo") v = Math.min(v, capSel.hi - 1); else v = Math.max(v, capSel.lo + 1);  // the ends never cross
+    capSel[end] = v; e.target.value = v;
+    store.set("cap", capSel); render();
+  });
+document.getElementById("oursOnly").addEventListener("click", () => { state.ours = !state.ours; render(); });
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value.trim(); render(); });
+const openRows = new Set();  // rows opened out of the compact view, by show id
+document.getElementById("out").addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("row") && document.body.classList.contains("compact")) {
+    e.preventDefault(); e.target.click();
+  }
+});
+document.getElementById("out").addEventListener("click", e => {
+  const r = e.target.closest(".row");
+  if (r && document.body.classList.contains("compact") && !e.target.closest("a, button")) {
+    const ids = r.dataset.ids.split(",");
+    const open = !r.classList.contains("open");
+    ids.forEach(id => open ? openRows.add(id) : openRows.delete(id));
+    r.classList.toggle("open", open);
+    return;
+  }
+  const c = e.target.closest(".cal");
+  if (c) {
+    const s = city.all.find(x => x.id === c.dataset.ids.split(",")[0]);
+    const all = city.all.filter(x => c.dataset.ids.split(",").includes(x.id));  // a folded run exports every night
+    downloadIcs(all, `${s.headliner} ${md(s.date)}`);
+    return;
+  }
+  const b = e.target.closest(".save"); if (!b) return;
+  const ids = b.dataset.ids.split(",");
+  const on = !ids.every(id => saved.has(id));
+  ids.forEach(id => on ? saved.add(id) : saved.delete(id));
+  store.set("saved", [...saved]);
+  render();
+});
+
+render();
+</script>
