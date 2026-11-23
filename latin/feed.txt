@@ -1,5 +1,5 @@
 THE·TEAM Latin roster and pursuits: shows in New York, Los Angeles and Miami
-Updated 2026-11-23T22:33:50Z UTC. Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.
+Updated 2026-11-23T22:44:24Z UTC. Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.
 
 NEW IN THE LAST 7 DAYS (0)
 - none
