@@ -1,4 +1,6 @@
-"""Every Latin show in New York, Los Angeles and Miami, from the Ticketmaster Discovery API.
+"""Every Latin roster show in New York, Los Angeles and Miami, from the Ticketmaster Discovery API.
+
+Roster only: a show is listed only when an artist on the roster (data/latin.json) is on the bill.
 
     python3 shows.py        sweep Ticketmaster, rebuild index.html
 
@@ -126,6 +128,11 @@ def main():
                          "price": None, "status": None})
         rows.sort(key=lambda s: (s["date"], s["time"] or "99", s["headliner"]))
 
+    # Roster only: a show is listed when a roster artist is on the bill, nobody else's.
+    lp = os.path.join(HERE, "data", "latin.json")
+    rset = {norm(a.get("display") or a["name"]) for a in json.load(open(lp))["artists"] if a.get("group") == "roster"} if os.path.exists(lp) else set()
+    rows = [s for s in rows if any(norm(a) in rset for a in [s["headliner"], *s["support"]])]
+
     now = datetime.datetime.now(datetime.timezone.utc)
     stamp = now.strftime(STAMP)
     first_run = not os.path.exists(SEEN)
@@ -159,7 +166,7 @@ VENUE_ALIAS = {
     "House of Blues Anaheim": "House Of Blues Anaheim",
 }
 PAGE_KEY = {"ny": "nyc", "la": "la", "mia": "mia"}
-WINDOW_DAYS = 30   # Next month: today through 30 days ahead
+WINDOW_DAYS = 365  # Upcoming: every roster date in the next year
 
 
 def venue_name(v):
@@ -212,7 +219,7 @@ def write_page(rows, now):
     open(os.path.join(HERE, "index.html"), "w").write(
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-        '<meta name="description" content="Every Latin show in New York, Los Angeles and Miami, from Ticketmaster. Updated every morning.">\n'
+        '<meta name="description" content="Every Latin roster show in New York, Los Angeles and Miami, from Ticketmaster. Updated every morning.">\n'
         '<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>\n'
         + body + "\n</html>\n")
 

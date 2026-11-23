@@ -1,4 +1,4 @@
-<title>Latin Shows</title>
+<title>Latin Roster Shows</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tinos:ital@0;1&display=swap">
@@ -268,7 +268,7 @@ body.compact { font-size: 12.5px; }
 <header class="mast">
   <div class="wrap">
     <nav class="pages label" id="pages" aria-label="Page">
-      <a href="#nyc" data-page="week">Next month</a>
+      <a href="#nyc" data-page="week">Upcoming</a>
       <a href="#nyc/announced" data-page="new">Just announced<span class="new-count" id="newN"></span></a>
     </nav>
     <div class="checked label"><span class="dot"></span><span id="checked"></span><a class="byline" href="latin/">Latin roster &rarr;</a></div>
@@ -295,7 +295,7 @@ body.compact { font-size: 12.5px; }
       <button class="tab" data-group="date">Show date<span class="dir" aria-hidden="true"></span></button>
       <button class="tab" data-group="onsale">On sale<span class="dir" aria-hidden="true"></span></button>
     </span>
-    <button class="toggle team" id="oursOnly" aria-pressed="false">Roster shows only</button>
+    <button class="toggle team" id="oursOnly" aria-pressed="false" hidden>Roster shows only</button>
     <button class="toggle" id="noSupport" aria-pressed="false">No support only</button>
     <div class="cap" id="capBox" title="Room capacity (approximate). Drag either end.">
       <span class="cap-label">Cap</span>
@@ -316,7 +316,7 @@ body.compact { font-size: 12.5px; }
     <div class="xp-head"><h2 id="exportTitle">Export</h2><button class="xp-x" value="cancel" aria-label="Close">×</button></div>
     <fieldset><legend>Cities</legend><div class="xp-row" id="xpCities"></div></fieldset>
     <fieldset><legend>List</legend>
-      <div class="xp-row"><label><input type="radio" name="xpList" value="new"> Just Announced</label><label><input type="radio" name="xpList" value="week"> Upcoming Shows (next month)</label></div>
+      <div class="xp-row"><label><input type="radio" name="xpList" value="new"> Just Announced</label><label><input type="radio" name="xpList" value="week"> Upcoming Shows</label></div>
     </fieldset>
     <fieldset id="xpSinceBox"><legend>Announced</legend>
       <div class="xp-row">
@@ -333,7 +333,7 @@ body.compact { font-size: 12.5px; }
     </fieldset>
     <fieldset><legend>Filters</legend>
       <label class="xp-check"><input type="checkbox" id="xpFav"> Favorite venues only</label>
-      <label class="xp-check"><input type="checkbox" id="xpTeam"> Roster shows only</label>
+      <label class="xp-check" hidden><input type="checkbox" id="xpTeam"> Roster shows only</label>
       <label class="xp-check"><input type="checkbox" id="xpNoSup"> No support only</label>
       <div class="cap xp-cap" id="xpCapBox" title="Room capacity (approximate). Drag either end.">
         <span class="cap-label">Cap</span>
@@ -377,7 +377,7 @@ body.compact { font-size: 12.5px; }
 <footer class="foot">
   <div class="wrap">
     <p>Hearts are saved in this browser only.</p>
-    <p class="credit">Source: Ticketmaster Discovery API, genre Latin. Room sizes are approximate.</p>
+    <p class="credit">Roster artists only. Source: Ticketmaster Discovery API. Room sizes are approximate.</p>
   </div>
 </footer>
 
@@ -415,7 +415,7 @@ let shows = city.shows;
 const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 const now = new Date(); now.setHours(0, 0, 0, 0);
 const winStart = new Date(now);
-const winEnd = new Date(now); winEnd.setDate(now.getDate() + 30);
+const winEnd = new Date(now); winEnd.setDate(now.getDate() + 365);
 const FROM = iso(winStart) > DATA.week[0] ? iso(winStart) : DATA.week[0];
 const TO = iso(winEnd) < DATA.week[1] ? iso(winEnd) : DATA.week[1];
 const TODAY_ISO = iso(now);
@@ -477,7 +477,7 @@ function chip(label, key, val, extra) {
   return `<button class="chip" data-${key}="${esc(val)}" aria-pressed="false">${label}${extra ? `<small>${extra}</small>` : ""}</button>`;
 }
 document.getElementById("dayChips").innerHTML =
-  chip("All days", "day", "all") + weekDays.map(d => chip(dow(d), "day", d, md(d))).join("");
+  chip("All days", "day", "all") + weekDays.filter(d => CITIES.some(c => c.shows.some(s => s.date === d))).map(d => chip(dow(d), "day", d, mdy(d))).join("");
 
 const billPos = (s, a) => { const i = [s.headliner, ...s.support].indexOf(a); return i < 0 ? 99 : i; };
 const agentsOf = s => [...new Set(s.clients.flatMap(c => [...(c.agents || []), ...(c.service || [])]))];
@@ -730,7 +730,7 @@ function render() {
     a.href = "#" + SLUG[cityKey] + (a.dataset.page === "new" ? "/announced" : "");
     a.toggleAttribute("aria-current", a.dataset.page === state.page); if (a.dataset.page === state.page) a.setAttribute("aria-current", "page");
   });
-  document.getElementById("range").textContent = state.page === "new" ? "Just announced" : STALE ? "Listings out of date" : md(FROM) + " – " + md(TO);
+  document.getElementById("range").textContent = state.page === "new" ? "Just announced" : STALE ? "Listings out of date" : mdy(FROM) + " – " + mdy(TO);
   document.querySelectorAll(".tab[data-view]").forEach(t => t.setAttribute("aria-selected", t.dataset.view === state.view));
   document.querySelectorAll(".tab[data-group]").forEach(t => {
     const on = t.dataset.group === state.group, desc = annDir[t.dataset.group] === "desc";
