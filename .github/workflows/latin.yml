@@ -3,10 +3,9 @@
 # in NY, LA and Miami and rebuild index.html (shows.py). No Claude, no browser.
 #
 # To change the list: Actions tab > "Latin roster" > Run workflow > pick an action, type a name.
-# The list is stored encrypted (data/latin.enc, CLIENTS_KEY). Note: in this public repo the name
-# typed into the form shows in the run's log, and the published page lists it anyway.
+# The list is data/latin.json, in plain text.
 #
-# Secrets: CLIENTS_KEY (this repo's own key for data/latin.enc), TICKETMASTER_API_KEY.
+# Secret: TICKETMASTER_API_KEY.
 name: Latin roster
 
 on:
@@ -43,8 +42,6 @@ jobs:
   latin:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      CLIENTS_KEY: ${{ secrets.CLIENTS_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -90,7 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898583+github-actions[bot]@users.noreply.github.com"
-          git add data/latin.enc data/latin_seen.json latin/ index.html shows.json data/shows_seen.json
+          git add data/latin.json data/latin_seen.json latin/ index.html shows.json data/shows_seen.json
           if git diff --cached --quiet; then echo "nothing changed"; exit 0; fi
           git commit -q -m "Latin roster: ${{ github.event_name == 'workflow_dispatch' && inputs.action || 'daily refresh' }}"
           for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin main && exit 0; sleep 5; done

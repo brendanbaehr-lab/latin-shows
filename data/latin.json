@@ -1,0 +1,324 @@
+{
+ "artists": [
+  {
+   "name": "ALEX SENSATION",
+   "group": "roster",
+   "tm": "K8vZ917Cfg7",
+   "added": "2026-11-23",
+   "display": "Alex Sensation",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "ANUEL AA",
+   "group": "roster",
+   "tm": "K8vZ9179r_f",
+   "added": "2026-11-23",
+   "display": "Anuel AA",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "BLESSD",
+   "group": "roster",
+   "tm": "K8vZ917Q5n7",
+   "added": "2026-11-23",
+   "display": "BLESSD",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "BOLO",
+   "group": "roster",
+   "tm": "Z7r9jZ177Kxd",
+   "added": "2026-11-23",
+   "display": "BOLO",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "CA7RIEL & PACO AMOROSO",
+   "group": "roster",
+   "tm": "K8vZ917qOL7",
+   "added": "2026-11-23",
+   "display": "CA7RIEL & Paco Amoroso",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "CALEB CALLOWAY",
+   "group": "roster",
+   "tm": null,
+   "added": "2026-11-23",
+   "display": "Caleb Calloway",
+   "noMatch": "2026-11-23"
+  },
+  {
+   "name": "CHUWI",
+   "group": "roster",
+   "tm": "K8vZ917ripf",
+   "added": "2026-11-23",
+   "display": "Chuwi",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "CIMAFUNK",
+   "group": "roster",
+   "tm": "K8vZ917bEw7",
+   "added": "2026-11-23",
+   "display": "Cimafunk",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "CORINA SMITH",
+   "group": "roster",
+   "tm": "K8vZ917rb-f",
+   "added": "2026-11-23",
+   "display": "Corina Smith",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "DE LA GHETTO",
+   "group": "roster",
+   "tm": "K8vZ917KAM7",
+   "added": "2026-11-23",
+   "display": "De La Ghetto",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "DILLOM",
+   "group": "roster",
+   "tm": "K8vZ917h8u0",
+   "added": "2026-11-23",
+   "display": "Dillom",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "EL BOGUETO",
+   "group": "roster",
+   "tm": "K8vZ917jtM0",
+   "added": "2026-11-23",
+   "display": "El Bogueto",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "EL GRAN COMBO",
+   "group": "roster",
+   "tm": "K8vZ9175Px7",
+   "added": "2026-11-23",
+   "display": "El Gran Combo",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "ELSA Y ELMAR",
+   "group": "roster",
+   "tm": "K8vZ917KlY0",
+   "added": "2026-11-23",
+   "display": "Elsa y Elmar",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "ELVIS CRESPO",
+   "group": "roster",
+   "tm": "K8vZ9171jL7",
+   "added": "2026-11-23",
+   "display": "Elvis Crespo",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "FRANCISCA VALENZUELA",
+   "group": "roster",
+   "tm": "K8vZ917C_IV",
+   "added": "2026-11-23",
+   "display": "Francisca Valenzuela",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "GUITARRICADELAFUENTE",
+   "group": "roster",
+   "tm": "K8vZ917bcc0",
+   "added": "2026-11-23",
+   "display": "Guitarricadelafuente",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "IVY QUEEN",
+   "group": "roster",
+   "tm": "K8vZ917GIL7",
+   "added": "2026-11-23",
+   "display": "Ivy Queen",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "JESSE & JOY",
+   "group": "roster",
+   "tm": "K8vZ917G1wV",
+   "added": "2026-11-23",
+   "display": "Jesse & Joy",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "KALI UCHIS",
+   "group": "roster",
+   "tm": "K8vZ917K490",
+   "added": "2026-11-23",
+   "display": "Kali Uchis",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "LUNAY",
+   "group": "roster",
+   "tm": "K8vZ917bpZ7",
+   "added": "2026-11-23",
+   "display": "Lunay",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "MACARIO MARTINEZ",
+   "group": "roster",
+   "tm": "K8vZ917qTx7",
+   "added": "2026-11-23",
+   "display": "Macario Martinez",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "MARIA BECERRA",
+   "group": "roster",
+   "tm": "K8vZ917_W80",
+   "added": "2026-11-23",
+   "display": "Maria Becerra",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "MONSIEUR PERINE",
+   "group": "roster",
+   "tm": "K8vZ9172NOf",
+   "added": "2026-11-23",
+   "display": "Monsieur Perine",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "MYKE TOWERS",
+   "group": "roster",
+   "tm": "K8vZ917bvff",
+   "added": "2026-11-23",
+   "display": "Myke Towers",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "NSQK",
+   "group": "roster",
+   "tm": "K8vZ917hfL7",
+   "added": "2026-11-23",
+   "display": "NSQK",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "OVY ON THE DRUMS",
+   "group": "roster",
+   "tm": "K8vZ917L9yV",
+   "added": "2026-11-23",
+   "display": "Ovy on the Drums",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "PALOMA MORPHY",
+   "group": "roster",
+   "tm": "K8vZ917r4b0",
+   "added": "2026-11-23",
+   "display": "Paloma Morphy",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "PEDRO MIZUTANI",
+   "group": "roster",
+   "tm": null,
+   "added": "2026-11-23",
+   "display": "Pedro Mizutani",
+   "noMatch": "2026-11-23"
+  },
+  {
+   "name": "PRINCE ROYCE",
+   "group": "roster",
+   "tm": "K8vZ917Gzdf",
+   "added": "2026-11-23",
+   "display": "Prince Royce",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "RAFA PABON",
+   "group": "roster",
+   "tm": "K8vZ917LjI7",
+   "added": "2026-11-23",
+   "display": "Rafa Pabón",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "REIK",
+   "group": "roster",
+   "tm": "K8vZ917GeR0",
+   "added": "2026-11-23",
+   "display": "Reik",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "RØZ",
+   "group": "roster",
+   "tm": "K8vZ917rpkf",
+   "added": "2026-11-23",
+   "display": "Røz",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "RUBEN BLADES",
+   "group": "roster",
+   "tm": "K8vZ9171aO7",
+   "added": "2026-11-23",
+   "display": "Rubén Blades",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "SNOW THA PRODUCT",
+   "group": "roster",
+   "tm": "K8vZ9178NV7",
+   "added": "2026-11-23",
+   "display": "Snow Tha Product",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "VICTOR MANUELLE",
+   "group": "roster",
+   "tm": "K8vZ91753Y0",
+   "added": "2026-11-23",
+   "display": "Victor Manuelle",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "VICTOR MENDIVIL",
+   "group": "roster",
+   "tm": "K8vZ917rbvf",
+   "added": "2026-11-23",
+   "display": "Victor Mendivil",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "VILLANO ANTILLANO",
+   "group": "roster",
+   "tm": "K8vZ917hCzf",
+   "added": "2026-11-23",
+   "display": "Villano Antillano",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "YANDEL",
+   "group": "roster",
+   "tm": "K8vZ917oID0",
+   "added": "2026-11-23",
+   "display": "Yandel",
+   "tracked": "2026-11-23"
+  },
+  {
+   "name": "YOVNGCHIMI",
+   "group": "roster",
+   "tm": "K8vZ917jbt0",
+   "added": "2026-11-23",
+   "display": "yovngchimi",
+   "tracked": "2026-11-23"
+  }
+ ]
+}

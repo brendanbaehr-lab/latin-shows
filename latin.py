@@ -12,8 +12,7 @@ Runs with no person in the loop (GitHub Actions, .github/workflows/latin.yml) or
     python3 latin.py pin "Name" ID           fix a wrong Ticketmaster match ("none": not on Ticketmaster; "auto": search again)
     python3 latin.py init roster.txt         start the list from a file, one roster name a line
 
-The list lives in data/latin.enc, encrypted with the client key (CLIENTS_KEY, or .clients-key
-locally), so no data file in this public repo carries client or pursuit names in plain text.
+The list lives in data/latin.json (plain text: roster and pursuits are public, and the page lists them).
 Each artist: name (as typed), display (Ticketmaster's spelling), group (roster or pursuit),
 tm (attraction id; "none" = not on Ticketmaster), noMatch (date a name search last failed;
 retried weekly), tracked (date of the first lookup; dates already on sale then are not news).
@@ -33,7 +32,7 @@ from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-LIST = os.path.join(HERE, "data", "latin.enc")
+LIST = os.path.join(HERE, "data", "latin.json")
 SEEN = os.path.join(HERE, "data", "latin_seen.json")
 OUT = os.path.join(HERE, "latin")
 SITE = "https://brendanbaehr-lab.github.io/latin-shows/latin/"
@@ -53,27 +52,17 @@ NOT_A_SHOW = re.compile(r"(?i)\b(parking|vip|package|upgrade|suite|premium|club 
                         r"hospitality|lounge access|merch|shuttle|camping|locker|fast lane|soundcheck)\b")
 
 
-# ---------------------------------------------------------------- the list (encrypted)
-
-def fernet():
-    from cryptography.fernet import Fernet
-    key = os.environ.get("CLIENTS_KEY")
-    if not key and os.path.exists(os.path.join(HERE, ".clients-key")):
-        key = open(os.path.join(HERE, ".clients-key")).read()
-    if not key:
-        sys.exit("No client key: set CLIENTS_KEY (GitHub secret) or put it in .clients-key")
-    return Fernet(key.strip())
-
+# ---------------------------------------------------------------- the list
 
 def load_list():
     if not os.path.exists(LIST):
         return {"artists": []}
-    return json.loads(fernet().decrypt(open(LIST, "rb").read()))
+    return json.load(open(LIST))
 
 
 def save_list(lst):
     lst["artists"].sort(key=lambda a: (a["group"] != "roster", norm(a["name"])))
-    open(LIST, "wb").write(fernet().encrypt(json.dumps(lst, ensure_ascii=False).encode()))
+    json.dump(lst, open(LIST, "w"), ensure_ascii=False, indent=1)
 
 
 def norm(s):
