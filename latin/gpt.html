@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Latin Report GPT</title>
+<style>
+:root { --bg:#fffdf8; --panel:#f3f2ee; --ink:#100906; --grey1:#d9d9d6; --muted:#6f7173; --accent:#2e7040;
+  --sans: Arial, "Helvetica Neue", Helvetica, sans-serif; --serif: "Times New Roman", Times, serif; color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 var(--sans); letter-spacing:-.01em; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 32px clamp(16px, 4vw, 40px) 64px; }
+a { color: inherit; }
+h1 { font:400 38px/1.05 var(--serif); margin:0 0 8px; }
+h2 { font:400 24px var(--serif); margin:36px 0 8px; padding-top:20px; border-top:1px solid var(--grey1); }
+p, li { max-width: 64ch; }
+.muted { color: var(--muted); }
+code { background: var(--panel); padding: 1px 5px; font-size: 13px; }
+.box { position: relative; background: var(--panel); border: 1px solid var(--grey1); padding: 14px 16px; margin: 10px 0; }
+.box pre { margin: 0; white-space: pre-wrap; font: 13px/1.5 ui-monospace, Menlo, monospace; }
+.copy { position: absolute; top: 8px; right: 8px; border: 1px solid var(--ink); background: var(--bg); padding: 6px 12px; cursor: pointer; font: 500 13px var(--sans); }
+.copy:hover { background: var(--ink); color: var(--bg); }
+ol li { margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+<p class="muted"><a href="./">&larr; Latin roster shows</a></p>
+<h1>Email report in ChatGPT</h1>
+<p class="muted">ChatGPT reads the show data itself from this site. The data refreshes every morning on GitHub, with no Claude involved.</p>
+
+<h2>Quick way: any ChatGPT chat</h2>
+<p>Paste this into ChatGPT (search or browsing on). It opens the data and writes the email.</p>
+<div class="box"><button class="copy" data-for="quick">Copy</button><pre id="quick">Open https://brendanbaehr-lab.github.io/latin-shows/latin/feed.txt and write this week's THE·TEAM Latin roster email from it. Use only what is in that file. Layout: subject line; one-line summary; "New this week"; then New York, Los Angeles and Miami, each with the next 30 days in date order and a short "further out" line; then a separate "Pursuits (not signed)" section; end with who has nothing booked and a one-line source note. Pursuits are not clients: never mix them into the roster sections.</pre></div>
+
+<h2>Best way: a Custom GPT (set up once)</h2>
+<p>Needs ChatGPT Plus, Team or Enterprise to create it. Anyone you share it with can use it.</p>
+<ol>
+<li>In ChatGPT: <b>Explore GPTs</b> &gt; <b>Create</b> &gt; <b>Configure</b>.</li>
+<li>Name: <code>Latin Roster Report</code>. Description: <code>Weekly NY/LA/Miami show email for THE·TEAM's Latin roster and pursuits.</code></li>
+<li>Instructions: paste the block below.</li>
+<li>Conversation starter: <code>Write this week's email</code>.</li>
+<li>Under <b>Actions</b> &gt; <b>Create new action</b> &gt; <b>Import from URL</b>, enter
+  <code>https://brendanbaehr-lab.github.io/latin-shows/latin/openapi.json</code>. Authentication: None. Privacy policy URL: <code>https://brendanbaehr-lab.github.io/latin-shows/latin/</code>.</li>
+<li>Turn off <b>Image generation</b>. Leave <b>Web search</b> on if you want it to double-check a date. Save, and share it with the team (Only people with a link).</li>
+</ol>
+<div class="box"><button class="copy" data-for="instr">Copy</button><pre id="instr">You write THE·TEAM's weekly Latin roster show email.
+
+ALWAYS start by calling getLatinShows. Use only that data. Never invent a show, venue, date, price or link. If the call fails, say so and stop.
+
+The data: "roster" are THE·TEAM's signed artists. "pursuits" are artists THE·TEAM is pursuing and does NOT represent. Each show has artist, group ("roster" or "pursuit"), city (New York, Los Angeles, Miami), date, time, venue, venueCity, tickets (Ticketmaster link), presale/onsale (UTC), price, status (cancelled/postponed), new (first seen in the last 7 days), source. "elsewhere" is touring outside the three cities. "updated" is when the data was refreshed.
+
+Email layout, in this order:
+1. Subject: Latin roster shows: week of [Monday's date]
+2. One line: how many roster shows are coming up in the three cities, and how many are new this week.
+3. NEW THIS WEEK: every show with new = true. Artist (linked to tickets), day and date, venue, city, and the presale or on-sale date if it is still ahead. Pursuits here get "(pursuit)" after the name. If none, write "Nothing new announced this week."
+4. NEW YORK, then LOS ANGELES, then MIAMI. Roster only. Next 30 days in date order, one line each: Day Mon D · Artist (linked) · Venue (town if not the city itself). Flag CANCELLED or POSTPONED in capitals. Then one "Further out:" line listing the later shows as Artist (Mon D). If a city has nothing, write "No roster dates."
+5. PURSUITS (NOT SIGNED): a separate section, after a divider. Same format as step 4, grouped by city. Start it with: "Artists we're pursuing. Not THE·TEAM clients."
+6. A short line: roster artists with nothing booked in NY, LA or Miami, and, if useful, the next notable date elsewhere for one or two of them.
+7. Footer in small text: "Source: Ticketmaster and THE·TEAM's client sheet, updated [updated, in Eastern time]. Shows sold only through AXS, DICE or a venue's own site may be missing. Full list: [page]."
+
+Style: plain, short, no hype, no emoji, no exclamation marks. Dates as "Fri Dec 11". Times as "8pm". Write so it pastes cleanly into Gmail: headings in bold capitals, simple bullets, real links.
+
+If asked for a different window (next 2 weeks, a month, one city, one artist), filter the same data that way and keep the layout. If asked about an artist not in the data, say they are not on the tracked list.</pre></div>
+
+<h2>Changing the list</h2>
+<p>On GitHub: <b>Actions</b> &gt; <b>Latin roster</b> &gt; <b>Run workflow</b>. Pick what to do (add a pursuit, add to roster, sign a pursuit, remove, or fix a Ticketmaster match), type the artist's name, and Run. The page and the data rebuild in about a minute. The list itself is stored encrypted in the repo.</p>
+</main>
+<script>
+document.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
+  const el = document.getElementById(b.dataset.for);
+  try { await navigator.clipboard.writeText(el.innerText); b.textContent = "Copied"; }
+  catch { const r = document.createRange(); r.selectNodeContents(el); getSelection().removeAllRanges(); getSelection().addRange(r); b.textContent = "Press ⌘C"; }
+  setTimeout(() => b.textContent = "Copy", 2000);
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+THE·TEAM Latin roster and pursuits: shows in New York, Los Angeles and Miami
+Updated 2026-11-23T17:22:27Z UTC. Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.
+
+NEW IN THE LAST 7 DAYS (0)
+- none
+
+ROSTER
+  NEW YORK (9)
+  - Fri Nov 27 | Caleb Calloway | The Edge (New York, New York) | THE·TEAM client sheet
+  - Fri Dec 11 8pm | Elvis Crespo | Prudential Center (Newark, NJ) | https://www.ticketmaster.com/amor-931-la-musica-presentan-amor-newark-new-jersey-12-11-2026/event/0200653AB4E4A9E7
+  - Sat Dec 12 8pm | De La Ghetto | Prudential Center (Newark, NJ) | https://www.ticketmaster.com/mega-979-la-musica-presentan-megabash-newark-new-jersey-12-12-2026/event/0200653AAFA79D8B
+  - Thu May 6, 2027 8pm | Victor Manuelle | Tilles Center Concert Hall (Brookville, NY) | CANCELLED | https://www.ticketmaster.com/victor-manuelle-retromantico-tour-pt-2-brookville-new-york-05-06-2027/event/0000624AAD8D38D3
+  - Fri May 7, 2027 6pm | Paloma Morphy | Mercury Lounge (New York, NY) | https://www.ticketmaster.com/paloma-morphy-new-york-new-york-05-07-2027/event/0000652EDD9A0FD0
+  - Sat May 15, 2027 7pm | NSQK | Irving Plaza Powered By Verizon 5G (New York, NY) | https://www.ticketmaster.com/nsqk-new-york-new-york-05-15-2027/event/00006556EAD51611
+  - Sun May 16, 2027 7pm | NSQK | Irving Plaza Powered By Verizon 5G (New York, NY) | https://www.ticketmaster.com/nsqk-new-york-new-york-05-16-2027/event/0000655DB4D7A85F
+  - Sun May 30, 2027 7pm | Jesse & Joy | United Palace (New York, NY) | https://www.ticketmaster.com/jesse-joy-el-amor-de-mexico-new-york-new-york-05-30-2027/event/00006563DE08CD7C
+  - Fri Jun 4, 2027 8pm | Jesse & Joy | Ritz Theatre (Elizabeth, NJ) | https://www.ticketmaster.com/jesse-joy-el-amor-de-mexico-elizabeth-new-jersey-06-04-2027/event/00006563E0BFD12F
+  LOS ANGELES (3)
+  - Fri Dec 18 9pm | BOLO | The Fox Theater-Pomona (Pomona, CA) | https://www.ticketmaster.com/event/Z7r9jZ1AAv3vP
+  - Sat Dec 19 9pm | BOLO | The Fox Theater-Pomona (Pomona, CA) | https://www.ticketmaster.com/event/Z7r9jZ1AAvI4A
+  - Sat Apr 17, 2027 8pm | Jesse & Joy | YouTube Theater (Inglewood, CA) | https://www.ticketmaster.com/jesse-joy-el-amor-de-mexico-inglewood-california-04-17-2027/event/0A006556A685B207
+  MIAMI (2)
+  - Fri Nov 27 8pm | El Gran Combo | Watsco Center at the University of Miami (Coral Gables, FL) | https://www.ticketmaster.com/el-gran-combo-coral-gables-florida-11-27-2026/event/0D0064FE04A2C17A
+  - Fri May 14, 2027 8pm | Jesse & Joy | James L Knight Center (Miami, FL) | https://www.ticketmaster.com/jesse-joy-miami-florida-05-14-2027/event/0D00655FDF38A0A0
+
+PURSUITS (not signed; tracked only)
+  NEW YORK (0)
+  - none
+  LOS ANGELES (0)
+  - none
+  MIAMI (0)
+  - none
+
+ROSTER WITH NOTHING IN NY, LA OR MIAMI: Alex Sensation, Anuel AA, BLESSD, CA7RIEL & Paco Amoroso, Chuwi, Cimafunk, Corina Smith, Dillom, El Bogueto, Elsa y Elmar, Francisca Valenzuela, Guitarricadelafuente, Ivy Queen, Kali Uchis, Lunay, Macario Martinez, Maria Becerra, Monsieur Perine, Myke Towers, Ovy on the Drums, Pedro Mizutani, Prince Royce, Rafa Pabón, Reik, Røz, Rubén Blades, Snow Tha Product, Victor Mendivil, Villano Antillano, Yandel, yovngchimi
+PURSUITS WITH NOTHING IN NY, LA OR MIAMI: none
+NOT FOUND ON TICKETMASTER (pin the right id): Caleb Calloway, Pedro Mizutani

@@ -1,0 +1,6 @@
+.env
+.clients-key
+data/tm/
+data/clients_raw_*
+__pycache__/
+.DS_Store

@@ -1,0 +1,33 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "THE·TEAM Latin shows",
+  "version": "1.0",
+  "description": "Upcoming shows in New York, Los Angeles and Miami for THE·TEAM's Latin roster and pursuits."
+ },
+ "servers": [
+  {
+   "url": "https://brendanbaehr-lab.github.io/latin-shows/latin"
+  }
+ ],
+ "paths": {
+  "/feed.json": {
+   "get": {
+    "operationId": "getLatinShows",
+    "summary": "All upcoming NY/LA/Miami shows for the Latin roster and pursuits, refreshed daily",
+    "responses": {
+     "200": {
+      "description": "The feed",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
