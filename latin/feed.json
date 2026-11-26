@@ -1,6 +1,6 @@
 {
  "title": "THE·TEAM Latin roster and pursuits: shows in New York, Los Angeles and Miami",
- "updated": "2026-11-25T13:50:13Z",
+ "updated": "2026-11-26T13:48:35Z",
  "about": "Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.",
  "page": "https://brendanbaehr-lab.github.io/latin-shows/latin/",
  "cities": {
@@ -327,7 +327,7 @@
    ]
   },
   "Jesse & Joy": {
-   "count": 19,
+   "count": 20,
    "next": [
     "2026-12-06 Ciudad de México, CDMX",
     "2027-02-14 Ciudad de México, CDMX",
