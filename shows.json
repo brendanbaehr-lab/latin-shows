@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-26T13:49:07Z",
+"updated": "2026-11-27T13:48:35Z",
 "source": "Ticketmaster Discovery API, genre Latin",
 "shows": [
 {
@@ -19,6 +19,25 @@
 "price": null,
 "status": null,
 "firstSeen": "baseline",
+"note": ""
+},
+{
+"id": "15074323",
+"date": "2026-11-27",
+"time": "23:30",
+"event": "Anuel AA",
+"headliner": "Anuel AA",
+"support": [],
+"venue": "LIV Nightclub Miami",
+"venueCity": "Miami Beach, FL",
+"city": "mia",
+"subgenre": null,
+"tickets": "https://www.ticketweb.com/event/anuel-liv-nightclub-miami-tickets/15074323",
+"onsale": "2026-11-27T13:33:00Z",
+"presale": null,
+"price": null,
+"status": null,
+"firstSeen": "2026-11-27T13:48:35Z",
 "note": ""
 },
 {

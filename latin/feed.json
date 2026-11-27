@@ -1,6 +1,6 @@
 {
  "title": "THE·TEAM Latin roster and pursuits: shows in New York, Los Angeles and Miami",
- "updated": "2026-11-26T13:48:35Z",
+ "updated": "2026-11-27T13:47:48Z",
  "about": "Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.",
  "page": "https://brendanbaehr-lab.github.io/latin-shows/latin/",
  "cities": {
@@ -68,6 +68,21 @@
    "onsale": "2026-08-05T14:00:00Z",
    "new": false,
    "firstSeen": "baseline",
+   "source": "Ticketmaster"
+  },
+  {
+   "artist": "Anuel AA",
+   "group": "roster",
+   "city": "Miami",
+   "date": "2026-11-27",
+   "time": "23:30",
+   "venue": "LIV Nightclub Miami",
+   "venueCity": "Miami Beach, FL",
+   "event": "Anuel",
+   "tickets": "https://www.ticketweb.com/event/anuel-liv-nightclub-miami-tickets/15074323",
+   "onsale": "2026-11-27T13:33:00Z",
+   "new": true,
+   "firstSeen": "2026-11-27T13:47:48Z",
    "source": "Ticketmaster"
   },
   {
@@ -294,6 +309,12 @@
     "2027-04-16 Arlington, TX"
    ]
   },
+  "Chuwi": {
+   "count": 1,
+   "next": [
+    "2027-03-26 Monterrey, NL"
+   ]
+  },
   "Dillom": {
    "count": 2,
    "next": [
@@ -351,11 +372,11 @@
    ]
   },
   "Paloma Morphy": {
-   "count": 5,
+   "count": 6,
    "next": [
     "2027-03-13 Ciudad de México, CDMX",
-    "2027-04-27 San Diego, CA",
-    "2027-05-04 Toronto, ON"
+    "2027-03-26 Monterrey, NL",
+    "2027-04-27 San Diego, CA"
    ]
   },
   "Røz": {
@@ -368,6 +389,12 @@
    "count": 1,
    "next": [
     "2026-12-31 San Francisco, CA"
+   ]
+  },
+  "Victor Mendivil": {
+   "count": 1,
+   "next": [
+    "2027-03-26 Monterrey, NL"
    ]
   },
   "Yandel": {

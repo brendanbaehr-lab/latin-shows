@@ -1,8 +1,8 @@
 THE·TEAM Latin roster and pursuits: shows in New York, Los Angeles and Miami
-Updated 2026-11-26T13:48:35Z UTC. Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.
+Updated 2026-11-27T13:47:48Z UTC. Roster artists are signed to THE·TEAM. Pursuits are artists THE·TEAM is pursuing and does NOT represent; always label them as pursuits, never as clients. Dates come from the Ticketmaster Discovery API (every date per artist) and, for NYC and LA, THE·TEAM's client sheet. Shows sold only through AXS, DICE, Eventbrite or a venue's own site may be missing. 'new' means first seen in the last 7 days; firstSeen 'baseline' means it was already on sale when tracking began.
 
-NEW IN THE LAST 7 DAYS (0)
-- none
+NEW IN THE LAST 7 DAYS (1)
+- Anuel AA | Fri Nov 27 | LIV Nightclub Miami, Miami | NEW | https://www.ticketweb.com/event/anuel-liv-nightclub-miami-tickets/15074323
 
 ROSTER
   NEW YORK (8)
@@ -18,8 +18,9 @@ ROSTER
   - Fri Dec 18 9pm | BOLO | The Fox Theater-Pomona (Pomona, CA) | https://www.ticketmaster.com/event/Z7r9jZ1AAv3vP
   - Sat Dec 19 9pm | BOLO | The Fox Theater-Pomona (Pomona, CA) | https://www.ticketmaster.com/event/Z7r9jZ1AAvI4A
   - Sat Apr 17, 2027 8pm | Jesse & Joy | YouTube Theater (Inglewood, CA) | https://www.ticketmaster.com/jesse-joy-el-amor-de-mexico-inglewood-california-04-17-2027/event/0A006556A685B207
-  MIAMI (2)
+  MIAMI (3)
   - Fri Nov 27 8pm | El Gran Combo | Watsco Center at the University of Miami (Coral Gables, FL) | https://www.ticketmaster.com/el-gran-combo-coral-gables-florida-11-27-2026/event/0D0064FE04A2C17A
+  - Fri Nov 27 11:30pm | Anuel AA | LIV Nightclub Miami (Miami Beach, FL) | NEW | https://www.ticketweb.com/event/anuel-liv-nightclub-miami-tickets/15074323
   - Fri May 14, 2027 8pm | Jesse & Joy | James L Knight Center (Miami, FL) | https://www.ticketmaster.com/jesse-joy-miami-florida-05-14-2027/event/0D00655FDF38A0A0
 
 PURSUITS (not signed; tracked only)
@@ -30,6 +31,6 @@ PURSUITS (not signed; tracked only)
   MIAMI (0)
   - none
 
-ROSTER WITH NOTHING IN NY, LA OR MIAMI: Alex Sensation, Anuel AA, BLESSD, CA7RIEL & Paco Amoroso, Caleb Calloway, Chuwi, Cimafunk, Corina Smith, Dillom, El Bogueto, Elsa y Elmar, Francisca Valenzuela, Guitarricadelafuente, Ivy Queen, Kali Uchis, Lunay, Macario Martinez, Maria Becerra, Monsieur Perine, Myke Towers, Ovy on the Drums, Pedro Mizutani, Prince Royce, Rafa Pabón, Reik, Røz, Rubén Blades, Snow Tha Product, Victor Mendivil, Villano Antillano, Yandel, yovngchimi
+ROSTER WITH NOTHING IN NY, LA OR MIAMI: Alex Sensation, BLESSD, CA7RIEL & Paco Amoroso, Caleb Calloway, Chuwi, Cimafunk, Corina Smith, Dillom, El Bogueto, Elsa y Elmar, Francisca Valenzuela, Guitarricadelafuente, Ivy Queen, Kali Uchis, Lunay, Macario Martinez, Maria Becerra, Monsieur Perine, Myke Towers, Ovy on the Drums, Pedro Mizutani, Prince Royce, Rafa Pabón, Reik, Røz, Rubén Blades, Snow Tha Product, Victor Mendivil, Villano Antillano, Yandel, yovngchimi
 PURSUITS WITH NOTHING IN NY, LA OR MIAMI: none
 NOT FOUND ON TICKETMASTER (pin the right id): Caleb Calloway, Pedro Mizutani
